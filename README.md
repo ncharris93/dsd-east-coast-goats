@@ -253,7 +253,6 @@ This project demonstrates:
     <a href="https://www.youtube.com/@GiraffeReactor">YouTube Channel</a>
     </td>
     </div>
-
   </tr>
   <tr>
     <td><img src="https://github.com/ncharris93.png" width="50" height="50" alt="Noah's profile image" style="border-radius: 50%"/></td>
