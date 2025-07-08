@@ -247,8 +247,13 @@ This project demonstrates:
     <td>Khurram</td>
     <td>Cohort Lead</td>
     <td><a href="https://github.com/destocot">@destocot</a></td>
-    <td><a href="https://www.linkedin.com/in/khurram-ali1">LinkedIn Profile</a></td>
-    <td><a href="https://www.youtube.com/@GiraffeReactor">YouTube Channel</a></td>
+    <td>
+    <div style="flex-direction: column; align-items: center; display: flex; justify-content: center; height: 50px;">
+    <a href="https://www.linkedin.com/in/khurram-ali1">LinkedIn Profile</a>
+    <a href="https://www.youtube.com/@GiraffeReactor">YouTube Channel</a>
+    </td>
+    </div>
+
   </tr>
   <tr>
     <td><img src="https://github.com/ncharris93.png" width="50" height="50" alt="Noah's profile image" style="border-radius: 50%"/></td>
