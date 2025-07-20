@@ -26,8 +26,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.className} antialiased bg-background`}>
-        {children}
+      <body className={`${geistSans.className} antialiased`}>
+        <div className="container max-w-screen-xl mx-auto px-4">{children}</div>
       </body>
     </html>
   )
