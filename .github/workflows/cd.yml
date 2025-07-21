@@ -107,10 +107,9 @@ jobs:
             git config --global user.name "github-actions[bot]"
             git config --global user.email "github-actions[bot]@users.noreply.github.com"
             
-            git add lib/supabase/types.ts
-            
-            # Only commit if there are changes
-            if ! git diff --cached --quiet; then
+            # Only add and commit if there are changes
+            if ! git diff --quiet lib/supabase/types.ts; then
+              git add lib/supabase/types.ts
               git commit -m "chore: update database types [skip ci]" -m "🤖 Generated from database schema after migration"
               
               # Push using the PAT to bypass branch protection
