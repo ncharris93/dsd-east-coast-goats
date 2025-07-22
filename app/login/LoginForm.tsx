@@ -26,7 +26,12 @@ type LoginInputs = {
 export default function LoginForm() {
   const [loading, setLoading] = useState(false)
   const router = useRouter()
-  const form = useForm<LoginInputs>()
+  const form = useForm<LoginInputs>({
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  })
 
   const onSubmit: SubmitHandler<LoginInputs> = async ({ email, password }) => {
     setLoading(true)
@@ -34,7 +39,7 @@ export default function LoginForm() {
     setLoading(false)
 
     if (success) {
-      setTimeout(() => router.push('/'), 4000)
+      setTimeout(() => router.push('/'), 2000)
     }
   }
 
@@ -44,10 +49,17 @@ export default function LoginForm() {
         <div className="flex justify-center mb-4">
           <Image
             src="/icons/logo.svg"
-            alt="Haven Health Hub"
+            alt="Haven Health"
             width={120}
             height={120}
-            className="mx-auto mb-4"
+            className="block dark:hidden mx-auto mb-4"
+          />
+          <Image
+            src="/icons/logo_dark.svg"
+            alt="Haven Health"
+            width={120}
+            height={120}
+            className="hidden dark:block mx-auto mb-4"
           />
         </div>
 
