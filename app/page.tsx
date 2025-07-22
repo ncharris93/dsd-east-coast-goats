@@ -16,9 +16,9 @@ export default function Home() {
     <main className="flex flex-col gap-12 w-full">
       <section
         id="hero"
-        className="bg-[url(/images/hero-image.webp)] bg-center h-screen"
+        className="bg-[url(/images/hero-image.webp)] bg-center h-screen text-[#F8F6F1] dark:text-foreground"
       >
-        <div className="flex flex-col gap-8 items-center justify-center h-full backdrop-blur-xs backdrop-brightness-65 text-center text-white px-4">
+        <div className="flex flex-col gap-8 items-center justify-center h-full backdrop-blur-xs backdrop-brightness-65 text-center px-4 ">
           <div className="flex flex-col gap-2">
             <h1 className="text-4xl font-bold text-balance">
               Welcome to Haven Health
@@ -43,7 +43,7 @@ export default function Home() {
             href="#services"
             className="absolute left-1/2 bottom-4 transform -translate-x-1/2"
           >
-            <ArrowDownCircle className="size-16 text-white motion-safe:animate-bounce motion-safe:scroll-smooth" />
+            <ArrowDownCircle className="size-16 motion-safe:animate-bounce motion-safe:scroll-smooth" />
           </a>
         </div>
       </section>
@@ -59,7 +59,7 @@ export default function Home() {
             <div className="bg-card text-card-foreground flex flex-col gap-8 p-4 rounded-xl">
               <div className="flex flex-col gap-8 items-center text-left">
                 <h3 className="text-2xl font-semibold">General Check-up</h3>
-                <Stethoscope className="size-12" />
+                <Stethoscope className="size-12 text-accent" />
               </div>
               <div>
                 <p className="text-lg text-pretty">
@@ -78,7 +78,7 @@ export default function Home() {
                 <h3 className="text-2xl font-semibold">
                   Immunization/Vaccination
                 </h3>
-                <Syringe className="size-12" />
+                <Syringe className="size-12 text-accent" />
               </div>
               <div>
                 <p className="text-lg text-pretty">
@@ -96,7 +96,7 @@ export default function Home() {
                 <h3 className="text-2xl font-semibold text-balance">
                   Chronic Condition Follow-Up
                 </h3>
-                <PillBottle className="size-12" />
+                <PillBottle className="size-12 text-accent" />
               </div>
               <div>
                 <p className="text-lg text-pretty">
@@ -118,7 +118,7 @@ export default function Home() {
                 <h3 className="text-2xl font-semibold">
                   Mental Health Consultation
                 </h3>
-                <HandHeart className="size-12" />
+                <HandHeart className="size-12 text-accent" />
               </div>
               <div>
                 <p className="text-lg text-pretty">
