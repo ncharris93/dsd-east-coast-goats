@@ -47,7 +47,10 @@ export default function Home() {
           </a>
         </div>
       </section>
-      <section id="services" className="flex flex-col gap-8 px-4 items-center">
+      <section
+        id="services"
+        className="flex flex-col gap-8 px-4 items-center max-w-screen-sm mx-auto"
+      >
         <div>
           <h2 className="text-3xl font-bold text-center">Our Services</h2>
         </div>
@@ -136,7 +139,10 @@ export default function Home() {
           </Button>
         </div>
       </section>
-      <section id="about" className="flex flex-col gap-8 px-4 items-center">
+      <section
+        id="about"
+        className="flex flex-col gap-8 px-4 items-center max-w-screen-sm mx-auto"
+      >
         <div>
           <h2 className="text-3xl font-bold text-center">About Haven Health</h2>
         </div>
@@ -167,7 +173,10 @@ export default function Home() {
           </p>
         </div>
       </section>
-      <section id="contact" className="flex flex-col gap-8 px-4 items-center">
+      <section
+        id="contact"
+        className="flex flex-col gap-8 px-4 items-center max-w-screen-sm mx-auto"
+      >
         <div>
           <h2 className="text-3xl font-bold text-center">Contact Us</h2>
         </div>
