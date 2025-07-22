@@ -1,15 +1,27 @@
 import { CalendarHeart } from 'lucide-react'
+import { ArrowDownCircle } from 'lucide-react'
+import { Stethoscope } from 'lucide-react'
+import { Syringe } from 'lucide-react'
+import { HandHeart } from 'lucide-react'
+import { PillBottle } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 
 export default function Home() {
   return (
-    <main>
-      <section className="bg-[url(/images/hero-image.webp)] bg-center h-screen mx-auto">
+    <main className="flex flex-col gap-8 w-full">
+      <section
+        id="hero"
+        className="bg-[url(/images/hero-image.webp)] bg-center h-screen"
+      >
         <div className="flex flex-col gap-8 items-center justify-center h-full backdrop-blur-xs backdrop-brightness-65 text-center text-white px-4">
           <div className="flex flex-col gap-2">
-            <h1 className="text-4xl font-bold">Welcome to Haven Health</h1>
-            <p className="text-2xl">Your Wellness, Our Commitment</p>
+            <h1 className="text-4xl font-bold text-balance">
+              Welcome to Haven Health
+            </h1>
+            <p className="text-2xl text-balance">
+              Your Wellness, Our Commitment
+            </p>
           </div>
           <div>
             <Button
@@ -21,6 +33,103 @@ export default function Home() {
               Schedule Appointment
             </Button>
           </div>
+        </div>
+        <div>
+          <a
+            href="#services"
+            className="absolute left-1/2 bottom-4 transform -translate-x-1/2"
+          >
+            <ArrowDownCircle className="size-16 text-white motion-safe:animate-bounce motion-safe:scroll-smooth" />
+          </a>
+        </div>
+      </section>
+      <section id="services" className="flex flex-col gap-8 px-4 items-center">
+        <div>
+          <h2 className="text-3xl font-bold text-center">Our Services</h2>
+        </div>
+        <div className="grid grid-cols-1 gap-y-8 max-w-95">
+          <div>
+            <div className="bg-card text-card-foreground flex flex-col gap-8 p-4 rounded-xl">
+              <div className="flex flex-col gap-8 items-center text-left">
+                <h3 className="text-2xl font-semibold">General Check-up</h3>
+                <Stethoscope className="size-12" />
+              </div>
+              <div>
+                <p className="text-lg text-pretty">
+                  This service provides a comprehensive health assessment to
+                  monitor overall well-being, detect potential health issues
+                  early, and offer personalized advice for maintaining a healthy
+                  lifestyle. It typically includes a physical examination, vital
+                  signs measurement, and a review of medical history.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div className="bg-card text-card-foreground flex flex-col gap-8 p-4 rounded-xl">
+              <div className="flex flex-col gap-8 items-center text-left">
+                <h3 className="text-2xl font-semibold">
+                  Immunization/Vaccination
+                </h3>
+                <Syringe className="size-12" />
+              </div>
+              <div>
+                <p className="text-lg text-pretty">
+                  This service offers protective injections against various
+                  infectious diseases. Vaccinations help build immunity,
+                  preventing the spread of illnesses within the community and
+                  safeguarding individual health.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div className="bg-card text-card-foreground flex flex-col gap-8 p-4 rounded-xl">
+              <div className="flex flex-col gap-8 items-center text-left">
+                <h3 className="text-2xl font-semibold text-balance">
+                  Chronic Condition Follow-Up
+                </h3>
+                <PillBottle className="size-12" />
+              </div>
+              <div>
+                <p className="text-lg text-pretty">
+                  This service provides ongoing management and support for
+                  patients living with long-term health conditions such as
+                  diabetes, hypertension, asthma, or heart disease. It involves
+                  regular appointments to monitor symptoms, review and adjust
+                  treatment plans, educate patients on self-management
+                  strategies (like diet and exercise), and coordinate care with
+                  specialists, aiming to prevent complications, improve quality
+                  of life, and maintain overall well-being.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div className="bg-card text-card-foreground flex flex-col gap-8 p-4 rounded-xl">
+              <div className="flex flex-col gap-8 items-center text-left">
+                <h3 className="text-2xl font-semibold">
+                  Mental Health Consultation
+                </h3>
+                <HandHeart className="size-12" />
+              </div>
+              <div>
+                <p className="text-lg text-pretty">
+                  This service provides a confidential space for individuals to
+                  discuss emotional, psychological, and behavioral concerns with
+                  a qualified professional. The goal is to offer support,
+                  guidance, and strategies for improving mental well-being and
+                  coping with life&apos;s challenges.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <Button variant="default" size="lg" className="text-xl font-semibold">
+            <CalendarHeart className="size-6" />
+            Schedule Appointment
+          </Button>
         </div>
       </section>
     </main>
