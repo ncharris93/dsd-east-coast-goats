@@ -4,12 +4,16 @@ import { Stethoscope } from 'lucide-react'
 import { Syringe } from 'lucide-react'
 import { HandHeart } from 'lucide-react'
 import { PillBottle } from 'lucide-react'
+import { MapPin } from 'lucide-react'
+import { Phone } from 'lucide-react'
+import { Clock } from 'lucide-react'
+import { Footprints } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 
 export default function Home() {
   return (
-    <main className="flex flex-col gap-8 w-full">
+    <main className="flex flex-col gap-12 w-full">
       <section
         id="hero"
         className="bg-[url(/images/hero-image.webp)] bg-center h-screen"
@@ -130,6 +134,70 @@ export default function Home() {
             <CalendarHeart className="size-6" />
             Schedule Appointment
           </Button>
+        </div>
+      </section>
+      <section id="about" className="flex flex-col gap-8 px-4 items-center">
+        <div>
+          <h2 className="text-3xl font-bold text-center">About Haven Health</h2>
+        </div>
+        <div className="flex flex-col gap-4">
+          <div>
+            <h3 className="text-2xl font-semibold text-center">People First</h3>
+          </div>
+          <p className="text-lg text-pretty">
+            We combine the human touch with cutting-edge tech to make your
+            experience smoother and more efficient. Book appointments online,
+            receive automatic reminders, securely access your records anytime,
+            and even do virtual check-ins — all from your phone or computer.
+            Healthcare should fit into your life, not the other way around.
+          </p>
+        </div>
+        <div className="flex flex-col gap-4">
+          <div>
+            <h3 className="text-2xl font-semibold text-center">
+              Powered by Technology
+            </h3>
+          </div>
+          <p className="text-lg text-pretty">
+            We believe care starts with connection. From your first visit to
+            every follow-up, we take time to listen, understand, and support you
+            with compassion. You&apos;re more than just a patient — you&apos;re
+            part of our clinic family. Our team is made up of real people who
+            genuinely care, speak your language, and are here when you need us
+          </p>
+        </div>
+      </section>
+      <section id="contact" className="flex flex-col gap-8 px-4 items-center">
+        <div>
+          <h2 className="text-3xl font-bold text-center">Contact Us</h2>
+        </div>
+        <div className="flex flex-col gap-4">
+          <div className="flex flex-row gap-2">
+            <MapPin className="size-6" />
+            <p className="text-lg text-pretty">
+              123 Wellness Way, Health City, NY 12345
+            </p>
+          </div>
+          <div>
+            <a href="tel:" className="flex flex-row gap-2">
+              <Phone className="size-6" />
+              <p className="text-lg text-pretty">(555) 555-5555</p>
+            </a>
+          </div>
+          <div className="flex flex-row gap-2">
+            <Clock className="size-6" />
+            <div className="flex flex-col">
+              <p className="text-lg text-pretty">Monday - Saturday</p>
+              <p className="text-lg text-pretty">9 AM - 5 PM</p>
+            </div>
+          </div>
+          <div className="flex flex-row gap-2">
+            <Footprints className="size-6" />
+            <div className="flex flex-col">
+              <p className="text-lg text-pretty">Walk-Ins</p>
+              <p className="text-lg text-pretty">9 AM - 12 PM</p>
+            </div>
+          </div>
         </div>
       </section>
     </main>
