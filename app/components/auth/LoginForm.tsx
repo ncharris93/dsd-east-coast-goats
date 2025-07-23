@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
+import { loginAction } from '@/app/login/loginActions'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -15,8 +16,6 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-
-import { loginAction } from './loginActions'
 
 type LoginInputs = {
   email: string
