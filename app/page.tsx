@@ -181,34 +181,49 @@ export default function Home() {
           <h2 className="text-3xl font-bold text-center">Contact Us</h2>
         </div>
         <div className="flex flex-col gap-4">
-          <div className="flex flex-row gap-2">
-            <MapPin className="size-6" />
-            <p className="text-lg text-pretty">
-              123 Wellness Way, Health City, NY 12345
-            </p>
+          <div>
+            <a
+              href="https://maps.app.goo.gl/akyyouqaHcVawgiR6"
+              target="_blank"
+              rel="noopener, noreferrer"
+              className="flex flex-row gap-2"
+            >
+              <MapPin className="size-6" />
+              <p className="text-lg text-pretty">
+                123 Main St., Islip, NY 11751
+              </p>
+            </a>
           </div>
           <div>
-            <a href="tel:" className="flex flex-row gap-2">
+            <a href="tel:6315555555" className="flex flex-row gap-2">
               <Phone className="size-6" />
-              <p className="text-lg text-pretty">(555) 555-5555</p>
+              <p className="text-lg text-pretty">(631) 555-5555</p>
             </a>
           </div>
           <div className="flex flex-row gap-2">
             <Clock className="size-6" />
             <div className="flex flex-col">
               <p className="text-lg text-pretty">Monday - Saturday</p>
-              <p className="text-lg text-pretty">9 AM - 5 PM</p>
+              <p className="text-lg text-pretty">9AM - 5PM</p>
             </div>
           </div>
           <div className="flex flex-row gap-2">
             <Footprints className="size-6" />
             <div className="flex flex-col">
               <p className="text-lg text-pretty">Walk-Ins</p>
-              <p className="text-lg text-pretty">9 AM - 12 PM</p>
+              <p className="text-lg text-pretty">9AM - 12PM</p>
             </div>
           </div>
         </div>
       </section>
+      <div>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12093.524681257835!2d-73.23059610218785!3d40.73163749225007!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e8338c078e3efb%3A0xc616688e9560cfd0!2sIslip%2C%20NY!5e0!3m2!1sen!2sus!4v1753375360833!5m2!1sen!2sus"
+          className="w-full aspect-square"
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
     </main>
   )
 }
