@@ -13,7 +13,7 @@ import { Button } from '@/components/ui/button'
 
 export default function Home() {
   return (
-    <main className="flex flex-col gap-12 w-full">
+    <main className="flex flex-col gap-12 w-full mb-8">
       <section
         id="hero"
         className="bg-[url(/images/hero-image.webp)] bg-center h-screen text-[#F8F6F1] dark:text-foreground"
@@ -47,92 +47,72 @@ export default function Home() {
           </a>
         </div>
       </section>
-      <section
-        id="services"
-        className="flex flex-col gap-8 px-4 items-center max-w-screen-sm mx-auto"
-      >
-        <div>
-          <h2 className="text-3xl font-bold text-center">Our Services</h2>
+      <section id="services" className="flex flex-col gap-16 px-4">
+        <h2 className="text-3xl font-bold text-center">Our Services</h2>
+        <div
+          id="services-card-container"
+          className="grid grid-cols-1 gap-x-4 gap-y-8 mx-auto min-w-screen-sm md:grid-cols-2 md:max-w-screen-md lg:grid-cols-4 lg:max-w-screen-lg"
+        >
+          <article
+            id="check-up"
+            className="bg-card p-3 rounded-lg flex gap-4 items-center lg:flex-col lg:justify-evenly"
+          >
+            <div className="bg-accent p-3 rounded-full">
+              <Stethoscope className="size-8 text-accent-foreground" />
+            </div>
+            <div className="flex flex-col gap-2 w-full">
+              <h3 className="text-xl font-bold">General Check-Up</h3>
+              <p className="text-pretty">
+                Regular check-ups to monitor your health and catch any issues
+                early.
+              </p>
+            </div>
+          </article>
+          <article
+            id="chronin-condition"
+            className="bg-card p-4 rounded-lg flex gap-4 items-center w-full lg:flex-col lg:justify-evenly"
+          >
+            <div className="bg-accent p-3 rounded-full">
+              <PillBottle className="size-8 text-accent-foreground" />
+            </div>
+            <div className="flex flex-col gap-2 w-full">
+              <h3 className="text-xl font-bold">Chronic Condition Follow-Up</h3>
+              <p className="text-pretty">
+                Ongoing care and management for chronic conditions.
+              </p>
+            </div>
+          </article>
+          <article
+            id="vaccinations"
+            className="bg-card p-4 rounded-lg flex gap-4 items-center w-full lg:flex-col lg:justify-evenly"
+          >
+            <div className="bg-accent p-3 rounded-full">
+              <Syringe className="size-8 text-accent-foreground" />
+            </div>
+            <div className="flex flex-col gap-2 w-full">
+              <h3 className="text-xl font-bold">Vaccinations</h3>
+              <p className="text-pretty">
+                Vaccinations to keep you and your family healthy from
+                preventable diseases.
+              </p>
+            </div>
+          </article>
+          <article
+            id="mental-health"
+            className="bg-card p-4 rounded-lg flex gap-4 items-center w-full lg:flex-col lg:justify-evenly"
+          >
+            <div className="bg-accent p-3 rounded-full">
+              <HandHeart className="size-8 text-accent-foreground" />
+            </div>
+            <div className="flex flex-col gap-2 w-full">
+              <h3 className="text-xl font-bold">Mental Health Consulation</h3>
+              <p className="text-pretty">
+                Compassionate support for your mental well-being.
+              </p>
+            </div>
+          </article>
         </div>
-        <div className="grid grid-cols-1 gap-y-8 max-w-95">
-          <div>
-            <div className="bg-card text-card-foreground flex flex-col gap-8 p-4 rounded-xl">
-              <div className="flex flex-col gap-8 items-center text-left">
-                <h3 className="text-2xl font-semibold">General Check-up</h3>
-                <Stethoscope className="size-12 text-accent" />
-              </div>
-              <div>
-                <p className="text-lg text-pretty">
-                  This service provides a comprehensive health assessment to
-                  monitor overall well-being, detect potential health issues
-                  early, and offer personalized advice for maintaining a healthy
-                  lifestyle. It typically includes a physical examination, vital
-                  signs measurement, and a review of medical history.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div className="bg-card text-card-foreground flex flex-col gap-8 p-4 rounded-xl">
-              <div className="flex flex-col gap-8 items-center text-left">
-                <h3 className="text-2xl font-semibold">
-                  Immunization/Vaccination
-                </h3>
-                <Syringe className="size-12 text-accent" />
-              </div>
-              <div>
-                <p className="text-lg text-pretty">
-                  This service offers protective injections against various
-                  infectious diseases. Vaccinations help build immunity,
-                  preventing the spread of illnesses within the community and
-                  safeguarding individual health.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div className="bg-card text-card-foreground flex flex-col gap-8 p-4 rounded-xl">
-              <div className="flex flex-col gap-8 items-center text-left">
-                <h3 className="text-2xl font-semibold text-balance">
-                  Chronic Condition Follow-Up
-                </h3>
-                <PillBottle className="size-12 text-accent" />
-              </div>
-              <div>
-                <p className="text-lg text-pretty">
-                  This service provides ongoing management and support for
-                  patients living with long-term health conditions such as
-                  diabetes, hypertension, asthma, or heart disease. It involves
-                  regular appointments to monitor symptoms, review and adjust
-                  treatment plans, educate patients on self-management
-                  strategies (like diet and exercise), and coordinate care with
-                  specialists, aiming to prevent complications, improve quality
-                  of life, and maintain overall well-being.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div className="bg-card text-card-foreground flex flex-col gap-8 p-4 rounded-xl">
-              <div className="flex flex-col gap-8 items-center text-left">
-                <h3 className="text-2xl font-semibold">
-                  Mental Health Consultation
-                </h3>
-                <HandHeart className="size-12 text-accent" />
-              </div>
-              <div>
-                <p className="text-lg text-pretty">
-                  This service provides a confidential space for individuals to
-                  discuss emotional, psychological, and behavioral concerns with
-                  a qualified professional. The goal is to offer support,
-                  guidance, and strategies for improving mental well-being and
-                  coping with life&apos;s challenges.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div>
+        <div className="flex justify-center">
           <Button variant="default" size="lg" className="text-xl font-semibold">
             <CalendarHeart className="size-6" />
             Schedule Appointment
@@ -216,13 +196,15 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <div>
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12093.524681257835!2d-73.23059610218785!3d40.73163749225007!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e8338c078e3efb%3A0xc616688e9560cfd0!2sIslip%2C%20NY!5e0!3m2!1sen!2sus!4v1753375360833!5m2!1sen!2sus"
-          className="w-full aspect-square"
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-        ></iframe>
+      <div id="map">
+        <div>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12093.524681257835!2d-73.23059610218785!3d40.73163749225007!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e8338c078e3efb%3A0xc616688e9560cfd0!2sIslip%2C%20NY!5e0!3m2!1sen!2sus!4v1753375360833!5m2!1sen!2sus"
+            className="w-full aspect-square"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
       </div>
     </main>
   )
