@@ -15,7 +15,7 @@ import { Button } from '@/components/ui/button'
 
 export default function Home() {
   return (
-    <main className="flex flex-col gap-12 w-full mb-8">
+    <main className="flex flex-col gap-16 w-full mb-16">
       <section
         id="hero"
         className="bg-[url(/images/hero-image.webp)] bg-center h-screen text-[#F8F6F1] dark:text-foreground"
@@ -53,7 +53,7 @@ export default function Home() {
         <h2 className="text-3xl font-bold text-center">Our Services</h2>
         <div
           id="services-card-container"
-          className="grid grid-cols-1 gap-x-4 gap-y-8 mx-auto min-w-screen-sm md:grid-cols-2 md:max-w-screen-md"
+          className="grid grid-cols-1 gap-x-4 gap-y-8 mx-auto min-w-screen-sm md:grid-cols-2 md:max-w-screen-md xl:grid-cols-4 xl:max-w-screen-xl"
         >
           <article
             id="check-up"
@@ -123,91 +123,98 @@ export default function Home() {
       </section>
       <section
         id="about"
-        className="flex flex-col gap-8 px-4 items-center max-w-screen-sm mx-auto"
+        className="flex flex-col gap-16 px-4 items-center max-w-screen-lg mx-auto "
       >
-        <div>
-          <h2 className="text-3xl font-bold text-center">About Haven Health</h2>
-        </div>
-        <div className="flex flex-col gap-4">
+        <div className="bg-card text-card-foreground rounded-3xl px-8 py-12">
           <div>
-            <h3 className="text-2xl font-semibold text-center">People First</h3>
+            <h2 className="text-3xl font-bold text-center">
+              About Haven Health
+            </h2>
           </div>
-          <p className="text-lg text-pretty">
-            We combine the human touch with cutting-edge tech to make your
-            experience smoother and more efficient. Book appointments online,
-            receive automatic reminders, securely access your records anytime,
-            and even do virtual check-ins — all from your phone or computer.
-            Healthcare should fit into your life, not the other way around.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4">
-          <div>
-            <h3 className="text-2xl font-semibold text-center">
-              Powered by Technology
-            </h3>
+          <div className="grid grid-cols-1 gap-8 text-lg lg:grid-cols-2">
+            <div className="flex flex-col gap-4">
+              <p className="text-pretty">
+                At Haven Health, we are dedicated to providing comprehensive and
+                compassionate healthcare services to our community. Our team of
+                experienced professionals is committed to your well-being,
+                offering personalized care tailored to your unique needs.
+              </p>
+              <p className="text-pretty">
+                From routine check-ups to specialized treatments, we strive to
+                create a welcoming environment where you can feel safe and cared
+                for. Your health is our priority, and we are here to support you
+                every step of the way.
+              </p>
+            </div>
+            <div className="flex flex-col gap-4">
+              <p className="text-pretty">
+                Our state-of-the-art facility is equipped with the latest
+                medical technology, ensuring that you receive the highest
+                quality of care. We believe in a holistic approach to health,
+                focusing not only on physical well-being but also on mental and
+                emotional health.
+              </p>
+              <p className="text-pretty">
+                Join us at Haven Health, where your health journey begins with
+                trust, compassion, and excellence.
+              </p>
+            </div>
           </div>
-          <p className="text-lg text-pretty">
-            We believe care starts with connection. From your first visit to
-            every follow-up, we take time to listen, understand, and support you
-            with compassion. You&apos;re more than just a patient — you&apos;re
-            part of our clinic family. Our team is made up of real people who
-            genuinely care, speak your language, and are here when you need us
-          </p>
         </div>
       </section>
       <section
         id="contact"
-        className="flex flex-col gap-8 px-4 items-center max-w-screen-sm mx-auto"
+        className="flex flex-col gap-16 bg-card text-card-foreground rounded-3xl px-4 max-w-screen-lg mx-auto"
       >
-        <div>
-          <h2 className="text-3xl font-bold text-center">Contact Us</h2>
-        </div>
-        <div className="flex flex-col gap-4">
+        <div className="bg-card text-card-foreground rounded-3xl px-8 py-12">
           <div>
-            <a
-              href="https://maps.app.goo.gl/akyyouqaHcVawgiR6"
-              target="_blank"
-              rel="noopener, noreferrer"
-              className="flex flex-row gap-2"
-            >
-              <MapPin className="size-6" />
-              <p className="text-lg text-pretty">
-                123 Main St., Islip, NY 11751
-              </p>
-            </a>
+            <h2 className="text-3xl font-bold text-center">Contact Us</h2>
           </div>
-          <div>
-            <a href="tel:6315555555" className="flex flex-row gap-2">
-              <Phone className="size-6" />
-              <p className="text-lg text-pretty">(631) 555-5555</p>
-            </a>
-          </div>
-          <div className="flex flex-row gap-2">
-            <Clock className="size-6" />
-            <div className="flex flex-col">
-              <p className="text-lg text-pretty">Monday - Saturday</p>
-              <p className="text-lg text-pretty">9AM - 5PM</p>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+            <div className="flex flex-col gap-4 mx-auto px-4 md:col-span-1">
+              <div className="flex flex-row gap-4">
+                <MapPin className="size-6" />
+                <a
+                  href="https://maps.app.goo.gl/akyyouqaHcVawgiR6"
+                  target="_blank"
+                  rel="noopener, noreferrer"
+                  className="hover:underline"
+                >
+                  <p className="text-pretty">123 Main St., Islip, NY 11751</p>
+                </a>
+              </div>
+              <div className="flex flex-row gap-4">
+                <Phone className="size-6" />
+                <a href="tel:6315555555" className="hover:underline">
+                  <p className="text-pretty">(631) 555-5555</p>
+                </a>
+              </div>
+              <div className="flex flex-row gap-4">
+                <Clock className="size-6" />
+                <div className="flex flex-col">
+                  <p className="text-pretty">Monday - Saturday</p>
+                  <p className="text-pretty">9AM - 5PM</p>
+                </div>
+              </div>
+              <div className="flex flex-row gap-2">
+                <Footprints className="size-6" />
+                <div className="flex flex-col">
+                  <p className="text-pretty">Walk-Ins</p>
+                  <p className="text-pretty">9AM - 12PM</p>
+                </div>
+              </div>
             </div>
-          </div>
-          <div className="flex flex-row gap-2">
-            <Footprints className="size-6" />
-            <div className="flex flex-col">
-              <p className="text-lg text-pretty">Walk-Ins</p>
-              <p className="text-lg text-pretty">9AM - 12PM</p>
+            <div id="map" className="md:col-span-2 md:px-4">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12093.524681257835!2d-73.23059610218785!3d40.73163749225007!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e8338c078e3efb%3A0xc616688e9560cfd0!2sIslip%2C%20NY!5e0!3m2!1sen!2sus!4v1753375360833!5m2!1sen!2sus"
+                className="w-full aspect-square md:aspect-2/1"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
             </div>
           </div>
         </div>
       </section>
-      <div id="map">
-        <div>
-          <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12093.524681257835!2d-73.23059610218785!3d40.73163749225007!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e8338c078e3efb%3A0xc616688e9560cfd0!2sIslip%2C%20NY!5e0!3m2!1sen!2sus!4v1753375360833!5m2!1sen!2sus"
-            className="w-full aspect-square"
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          ></iframe>
-        </div>
-      </div>
     </main>
   )
 }
