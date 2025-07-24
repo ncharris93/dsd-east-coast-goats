@@ -1,13 +1,15 @@
-import { CalendarHeart } from 'lucide-react'
-import { ArrowDownCircle } from 'lucide-react'
-import { Stethoscope } from 'lucide-react'
-import { Syringe } from 'lucide-react'
-import { HandHeart } from 'lucide-react'
-import { PillBottle } from 'lucide-react'
-import { MapPin } from 'lucide-react'
-import { Phone } from 'lucide-react'
-import { Clock } from 'lucide-react'
-import { Footprints } from 'lucide-react'
+import {
+  ArrowDownCircle,
+  CalendarHeart,
+  Clock,
+  Footprints,
+  HandHeart,
+  MapPin,
+  Phone,
+  PillBottle,
+  Stethoscope,
+  Syringe,
+} from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 
@@ -51,13 +53,13 @@ export default function Home() {
         <h2 className="text-3xl font-bold text-center">Our Services</h2>
         <div
           id="services-card-container"
-          className="grid grid-cols-1 gap-x-4 gap-y-8 mx-auto min-w-screen-sm md:grid-cols-2 md:max-w-screen-md lg:grid-cols-4 lg:max-w-screen-lg"
+          className="grid grid-cols-1 gap-x-4 gap-y-8 mx-auto min-w-screen-sm md:grid-cols-2 md:max-w-screen-md"
         >
           <article
             id="check-up"
-            className="bg-card p-3 rounded-lg flex gap-4 items-center lg:flex-col lg:justify-evenly"
+            className="bg-card p-3 rounded-lg flex gap-4 items-center"
           >
-            <div className="bg-accent p-3 rounded-full">
+            <div className="bg-accent p-3 rounded-full size-fit">
               <Stethoscope className="size-8 text-accent-foreground" />
             </div>
             <div className="flex flex-col gap-2 w-full">
@@ -70,38 +72,38 @@ export default function Home() {
           </article>
           <article
             id="chronin-condition"
-            className="bg-card p-4 rounded-lg flex gap-4 items-center w-full lg:flex-col lg:justify-evenly"
+            className="bg-card p-4 rounded-lg flex gap-4 items-center w-full"
           >
-            <div className="bg-accent p-3 rounded-full">
+            <div className="bg-accent p-3 rounded-full size-fit">
               <PillBottle className="size-8 text-accent-foreground" />
             </div>
             <div className="flex flex-col gap-2 w-full">
               <h3 className="text-xl font-bold">Chronic Condition Follow-Up</h3>
               <p className="text-pretty">
-                Ongoing care and management for chronic conditions.
+                Ongoing care and management for chronic conditions like
+                diabetes.
               </p>
             </div>
           </article>
           <article
             id="vaccinations"
-            className="bg-card p-4 rounded-lg flex gap-4 items-center w-full lg:flex-col lg:justify-evenly"
+            className="bg-card p-4 rounded-lg flex gap-4 items-center w/full"
           >
-            <div className="bg-accent p-3 rounded-full">
+            <div className="bg-accent p-3 rounded-full size-fit">
               <Syringe className="size-8 text-accent-foreground" />
             </div>
             <div className="flex flex-col gap-2 w-full">
               <h3 className="text-xl font-bold">Vaccinations</h3>
               <p className="text-pretty">
-                Vaccinations to keep you and your family healthy from
-                preventable diseases.
+                Vaccinations to keep you and your family healthy.
               </p>
             </div>
           </article>
           <article
             id="mental-health"
-            className="bg-card p-4 rounded-lg flex gap-4 items-center w-full lg:flex-col lg:justify-evenly"
+            className="bg-card p-4 rounded-lg flex gap-4 items-center w-full"
           >
-            <div className="bg-accent p-3 rounded-full">
+            <div className="bg-accent p-3 rounded-full size-fit">
               <HandHeart className="size-8 text-accent-foreground" />
             </div>
             <div className="flex flex-col gap-2 w-full">
