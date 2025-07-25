@@ -26,7 +26,6 @@ type SignupInputs = {
 }
 
 export default function SignupForm() {
-  const [loading, setLoading] = useState(false)
   const router = useRouter()
   const form = useForm<SignupInputs>({
     defaultValues: {
@@ -37,15 +36,8 @@ export default function SignupForm() {
     },
   })
 
-  const onSubmit: SubmitHandler<SignupInputs> = async ({
-    firstName,
-    lastName,
-    email,
-    password,
-  }) => {
-    setLoading(true)
-    const response = await signUp({ firstName, lastName, email, password })
-    setLoading(false)
+  const onSubmit: SubmitHandler<SignupInputs> = async (values) => {
+    const response = await signUp(values)
 
     if (response.success) {
       showSuccess(response.message)
@@ -174,9 +166,9 @@ export default function SignupForm() {
             <Button
               type="submit"
               className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
-              disabled={loading}
+              disabled={form.formState.isSubmitting}
             >
-              {loading ? 'Creating account...' : 'Sign Up'}
+              {form.formState.isSubmitting ? 'Creating account...' : 'Sign Up'}
             </Button>
           </form>
         </Form>
