@@ -125,7 +125,7 @@ export default function Home() {
         id="about"
         className="flex flex-col gap-16 px-4 items-center max-w-screen-lg mx-auto "
       >
-        <div className="bg-card text-card-foreground rounded-3xl px-8 py-12">
+        <div className="bg-card text-card-foreground rounded-3xl px-8 py-12 flex flex-col gap-16">
           <div>
             <h2 className="text-3xl font-bold text-center">
               About Haven Health
@@ -166,11 +166,11 @@ export default function Home() {
         id="contact"
         className="flex flex-col gap-16 bg-card text-card-foreground rounded-3xl px-4 max-w-screen-lg mx-auto"
       >
-        <div className="bg-card text-card-foreground rounded-3xl px-8 py-12">
+        <div className="bg-card text-card-foreground rounded-3xl px-8 py-12 flex flex-col gap-16">
           <div>
             <h2 className="text-3xl font-bold text-center">Contact Us</h2>
           </div>
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+          <div className="grid grid-cols-1 gap-y-8 md:grid-cols-3">
             <div className="flex flex-col gap-4 mx-auto px-4 md:col-span-1">
               <div className="flex flex-row gap-4">
                 <MapPin className="size-6" />
