@@ -2,10 +2,8 @@
 
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
-import { loginAction } from '@/app/login/loginActions'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -16,6 +14,8 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { login } from '@/server/auth/actions'
+import { showError, showSuccess } from '@/utils/toast'
 
 type LoginInputs = {
   email: string
@@ -23,7 +23,6 @@ type LoginInputs = {
 }
 
 export default function LoginForm() {
-  const [loading, setLoading] = useState(false)
   const router = useRouter()
   const form = useForm<LoginInputs>({
     defaultValues: {
@@ -32,13 +31,14 @@ export default function LoginForm() {
     },
   })
 
-  const onSubmit: SubmitHandler<LoginInputs> = async ({ email, password }) => {
-    setLoading(true)
-    const success = await loginAction({ email, password })
-    setLoading(false)
+  const onSubmit: SubmitHandler<LoginInputs> = async (values) => {
+    const response = await login(values)
 
-    if (success) {
+    if (response.success) {
+      showSuccess(response.message)
       setTimeout(() => router.push('/'), 2000)
+    } else {
+      showError(response.message)
     }
   }
 
@@ -111,9 +111,9 @@ export default function LoginForm() {
             <Button
               type="submit"
               className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
-              disabled={loading}
+              disabled={form.formState.isSubmitting}
             >
-              {loading ? 'Logging in...' : 'Log In'}
+              {form.formState.isSubmitting ? 'Logging in...' : 'Log In'}
             </Button>
           </form>
         </Form>
