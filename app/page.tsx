@@ -13,11 +13,8 @@ import { Button } from '@/components/ui/button'
 
 import AboutImage from '../public/images/about-image.webp'
 
-import Header from './components/headers/Header'
-
 export default function Home() {
   return (
-
     <main className="flex flex-col gap-32 w-full mb-32">
       <section
         id="hero"
