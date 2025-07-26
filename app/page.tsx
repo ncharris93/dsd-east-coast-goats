@@ -30,10 +30,12 @@ export default function Home() {
             </p>
           </div>
           <div>
-            <Button variant="cta" size="cta" className="text-lg">
-              <CalendarHeart className="size-6" />
-              <Link href="/appointment">Schedule Appointment</Link>
-            </Button>
+            <Link href="/appointment">
+              <Button variant="cta" size="cta" className="text-lg">
+                <CalendarHeart className="size-6" />
+                Schedule Appointment
+              </Button>
+            </Link>
           </div>
         </div>
         <div>
@@ -115,10 +117,12 @@ export default function Home() {
           </article>
         </div>
         <div className="flex justify-center">
-          <Button variant="cta" size="cta" className="text-lg">
-            <CalendarHeart className="size-6" />
-            <Link href="/appointment">Schedule Appointment</Link>
-          </Button>
+          <Link href="/appointment">
+            <Button variant="cta" size="cta" className="text-lg">
+              <CalendarHeart className="size-6" />
+              Schedule Appointment
+            </Button>
+          </Link>
         </div>
       </section>
       <section id="about" className="max-w-screen-xl px-4 mx-auto">
