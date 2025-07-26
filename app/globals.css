@@ -110,7 +110,10 @@
   * {
     @apply border-border;
   }
+  html {
+    @apply scroll-smooth motion-reduce:scroll-auto;
+  }
   body {
-    @apply bg-background text-foreground antialiased scroll-smooth motion-reduce:scroll-auto;
+    @apply bg-background text-foreground antialiased;
   }
 }
