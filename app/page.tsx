@@ -18,7 +18,7 @@ export default function Home() {
     <main className="flex flex-col gap-32 w-full mb-32">
       <section
         id="hero"
-        className="bg-[url(/images/hero-image.webp)] bg-center bg-cover h-screen text-[#F8F6F1] dark:text-foreground"
+        className="bg-[url(/images/hero-image.webp)] bg-center bg-cover h-svh text-[#F8F6F1] dark:text-foreground"
       >
         <div className="flex flex-col gap-8 items-center justify-center h-full backdrop-blur-sm backdrop-brightness-60 text-center px-4 2xl:gap-16">
           <div className="flex flex-col gap-2">
