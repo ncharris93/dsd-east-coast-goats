@@ -54,17 +54,32 @@ export async function signUp({
   const supabase = await createClient()
 
   try {
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: { data: { first_name: firstName, last_name: lastName } },
     })
 
-    if (error) {
+    if (error || !data) {
       return {
         success: false,
         message: error.message || `Something went wrong`,
         error: error.name,
+      }
+    }
+
+    const { error: signupErr } = await supabase.from('person').insert({
+      first_name: firstName,
+      last_name: lastName,
+      role: 'patient',
+      person_uuid: data.user.id,
+    })
+
+    if (signupErr) {
+      return {
+        success: false,
+        message: 'Error signing up',
+        error: signupErr.message,
       }
     }
 
