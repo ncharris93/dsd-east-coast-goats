@@ -60,11 +60,11 @@ export async function signUp({
       options: { data: { first_name: firstName, last_name: lastName } },
     })
 
-    if (error || !data) {
+    if (error || !data || !data.user) {
       return {
         success: false,
-        message: error.message || `Something went wrong`,
-        error: error.name,
+        message: error?.message || 'Something went wrong',
+        error: error?.name || 'Something went wrong',
       }
     }
 
