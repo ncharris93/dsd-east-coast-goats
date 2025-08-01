@@ -40,7 +40,6 @@ export async function login({
   }
 }
 
-
 export async function signUp({
   firstName,
   lastName,
@@ -68,7 +67,7 @@ export async function signUp({
         error: error.name,
       }
     }
-    
+
     return {
       success: true,
       message: 'Signed up successfully',
@@ -84,14 +83,20 @@ export async function signUp({
   }
 }
 
-export async function signOut(): Promise<void> {
-  try {
-  } catch (err) {
-    console.error('Sign out error:', err)
-    throw new Error('Failed to sign out')
-  } finally {
-    redirect('/login')
+export async function logOut(): Promise<ActionResponse> {
+  const supabase = await createClient()
+
+  const { error } = await supabase.auth.signOut()
+
+  if (error) {
+    return {
+      success: false,
+      message: error.message || 'Log out went wrong',
+      error: error.name,
+    }
   }
+
+  redirect('./login')
 }
 
 export async function updatePassword() {}
