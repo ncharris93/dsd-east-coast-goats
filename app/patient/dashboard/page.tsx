@@ -72,7 +72,7 @@ async function fetchDashboardData(supabase: ReturnType<typeof createClient>) {
 `,
     )
 
-    .eq('patient_id', user.id)
+    .eq('person_id', user.id)
 
   let appointment: Appointment | null = null
   let provider = ''
