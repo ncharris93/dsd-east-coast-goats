@@ -1,5 +1,8 @@
-'use server'
+import 'server-only'
+
 import { createClient } from '@/lib/supabase/server'
+
+type AppointmentRow = { appointment_time: string | null }
 
 export async function getAppointment() {}
 
@@ -26,5 +29,11 @@ export async function getBookedAppointmentTimes(date: Date) {
     throw error
   }
 
-  return data.map((a) => new Date(a.appointment_time))
+  if (!data) {
+    return []
+  }
+
+  return (data as AppointmentRow[])
+    .filter((a) => a.appointment_time !== null)
+    .map((a) => new Date(a.appointment_time!))
 }

@@ -3,12 +3,16 @@
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
-import { FormData } from '@/lib/types/appointment'
-import { AppointmentType } from '@/lib/types/appointment'
 import { confirmBooking, getAvailableSlots } from '@/server/appointment/actions'
 import { showError, showSuccess } from '@/utils/toast'
 
 import { Calendar } from '../ui/calendar'
+
+type FormData = {
+  appointment_type: string
+  appointment_date: Date | undefined
+  appointment_time: string | null
+}
 
 const appointmentOptions = [
   {
@@ -103,7 +107,7 @@ export default function BookingForm() {
               onClick={() => {
                 setFormData({
                   ...formData,
-                  appointment_type: a.type as AppointmentType,
+                  appointment_type: a.type,
                 })
                 setPage(2)
               }}

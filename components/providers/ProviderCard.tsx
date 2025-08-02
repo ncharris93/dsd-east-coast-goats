@@ -1,7 +1,7 @@
-import { Provider } from '@/lib/types/provider'
+import { ProviderInfo } from '@/lib/types/provider'
 
 type Props = {
-  provider: Provider
+  provider: ProviderInfo
 }
 
 export default function ProviderCard({ provider }: Props) {

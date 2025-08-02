@@ -1,10 +1,12 @@
 'use server'
 import { createClient } from '@/lib/supabase/server'
-import { AppointmentType } from '@/lib/types/appointment'
+import { Database } from '@/lib/supabase/types'
 import { ActionResponse } from '@/lib/types/auth'
 
 import { getBookedAppointmentTimes } from './queries'
 import { generateAvailableTimeSlots } from './timeSlots'
+
+type AppointmentType = Database['public']['Enums']['appointment_type_enums']
 
 export async function createAppointment() {}
 

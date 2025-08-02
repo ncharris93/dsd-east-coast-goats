@@ -1,17 +1,18 @@
 import 'server-only'
 
 import { createClient } from '@/lib/supabase/server'
+import { ProviderInfo } from '@/lib/types/provider'
 
-export async function getProvider() {
+export async function getProvider(): Promise<ProviderInfo> {
   const supabase = await createClient()
 
   const { data, error } = await supabase
     .from('person')
     .select(
       `
-      id, first_name, last_name,
-      contact:contact(contact_type, contact_value),
-      address:address(streeta, city, address_state, zip_code)
+      *,
+      contact(*),
+      address(*)
     `,
     )
     .eq('role', 'provider')
