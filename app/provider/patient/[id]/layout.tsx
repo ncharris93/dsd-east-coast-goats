@@ -1,16 +1,22 @@
 import React from 'react'
 
-import PatientDetailsSidebar from '@/app/provider/patient/[id]/PatientDetailsSidebar'
+import PatientContextProvider from '@/components/provider/patientDetails/PatientContext'
+import PatientDetailsSidebar from '@/components/provider/patientDetails/PatientDetailsSidebar'
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
+import type { ActionResponse } from '@/lib/types/auth'
 import { getAppointments } from '@/server/appointment/queries'
 import { getAddress, getPerson } from '@/server/auth/queries'
 import { getPatient } from '@/server/patient/queries'
 import { getMedicalVisit } from '@/server/patient/queries'
 
-import PatientContextProvider from './PatientContext'
+function assertData<T>(result: ActionResponse<T>, message: string): T {
+  if (!result.data) {
+    throw new Error(message)
+  }
+  return result.data
+}
 
 export default async function Layout({
-  children,
   params,
   patientDetails,
 }: {
@@ -19,77 +25,34 @@ export default async function Layout({
   patientDetails: React.ReactNode
 }) {
   const { id } = await params
-
-  const patientData = await getPatient(id)
-
-  if (!patientData.data) {
-    return (
-      <SidebarProvider>
-        <PatientDetailsSidebar patientId={id} />
-        <main className="border-3 border-yellow w-full bg-background">
-          <SidebarTrigger className="hover:bg-foreground cursor-pointer" />
-          <p>Patient Not Found</p>
-        </main>
-      </SidebarProvider>
-    )
-  }
-
-  const personData = await getPerson(patientData.data.personId)
-
-  if (!personData.data) {
-    console.log('person data check failed')
-    return null
-  }
-
-  if (!patientData.data.personId) {
-    console.log('patient data person id check failed')
-    return null
-  }
-
-  const medicalVisitData = await getMedicalVisit(patientData.data.id)
-
-  if (!medicalVisitData.data) {
-    console.log('appointment data check failed')
-    return null
-  }
-
-  const appointmentsData = await getAppointments(patientData.data?.id)
-
-  console.log('patient details appointments data:', appointmentsData)
-
-  // const appointmentData = await getAppointment(patientData.data.person_id)
-
-  // console.log('current appointment:', appointmentData)
-
-  if (!appointmentsData.data) {
-    console.log('appointment data check failed')
-    return null
-  }
-
-  console.log('patient layout appointment data:', appointmentsData.data)
-
-  const addressData = await getAddress(personData.data.id)
-
-  console.log('current address in layout:', addressData)
-
-  if (!addressData.data) {
-    console.log('address data check failed')
-    return null
-  }
+  const patient = assertData(await getPatient(id), 'Patient not found')
+  const person = assertData(
+    await getPerson(patient.personId),
+    'Person not found',
+  )
+  const medicalVisit = assertData(
+    await getMedicalVisit(patient.id),
+    'Medical visit not found',
+  )
+  const appointments = assertData(
+    await getAppointments(patient.id),
+    'Appointments not found',
+  )
+  const address = assertData(await getAddress(person.id), 'Address not found')
 
   return (
     <PatientContextProvider
-      patient={patientData.data}
-      appointments={appointmentsData.data}
-      person={personData.data}
-      medicalVisit={medicalVisitData.data}
-      address={addressData.data}
+      patient={patient}
+      appointments={appointments}
+      person={person}
+      medicalVisit={medicalVisit}
+      address={address}
+      id={id}
     >
       <SidebarProvider>
         <PatientDetailsSidebar patientId={id} />
         <main className=" w-full bg-background">
           <SidebarTrigger className="hover:bg-foreground cursor-pointer" />
-          {children}
           {patientDetails}
         </main>
       </SidebarProvider>

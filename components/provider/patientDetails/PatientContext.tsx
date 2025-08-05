@@ -16,6 +16,7 @@ export interface PatientContextProps {
   person: Person | null
   medicalVisit: MedicalVisit | null
   address: Address | null
+  id: number
 }
 
 interface PatientContextType {
@@ -24,6 +25,7 @@ interface PatientContextType {
   person: Person | null
   medicalVisit: MedicalVisit | null
   address: Address | null
+  id: number
 }
 export const PatientContext = createContext<PatientContextType>({
   patient: null,
@@ -31,6 +33,7 @@ export const PatientContext = createContext<PatientContextType>({
   person: null,
   medicalVisit: null,
   address: null,
+  id: NaN,
 })
 
 export default function PatientContextProvider({
@@ -40,10 +43,11 @@ export default function PatientContextProvider({
   person,
   medicalVisit,
   address,
+  id,
 }: PatientContextProps) {
   return (
     <PatientContext.Provider
-      value={{ patient, appointments, person, medicalVisit, address }}
+      value={{ patient, appointments, person, medicalVisit, address, id }}
     >
       {children}
     </PatientContext.Provider>

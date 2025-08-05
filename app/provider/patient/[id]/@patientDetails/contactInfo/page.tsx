@@ -4,6 +4,7 @@ import { SlashIcon } from 'lucide-react'
 import Image from 'next/image'
 import { useContext } from 'react'
 
+import { PatientContext } from '@/components/provider/patientDetails/PatientContext'
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -12,8 +13,6 @@ import {
 } from '@/components/ui/breadcrumb'
 import { Card, CardContent } from '@/components/ui/card'
 import { formatDate, getAge } from '@/utils/helpers'
-
-import { PatientContext } from '../../PatientContext'
 
 export default function Page() {
   const { patient, appointments, person, medicalVisit, address } =

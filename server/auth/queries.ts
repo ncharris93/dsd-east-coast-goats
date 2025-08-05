@@ -116,8 +116,6 @@ export async function getPerson(
       }
     }
 
-    console.log('get person data:', data)
-
     const person: Person = {
       id: data.id,
       firstName: data.first_name,

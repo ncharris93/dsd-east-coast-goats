@@ -1,16 +1,11 @@
 'use client'
 
-// import {
-//   Accordion,
-//   AccordionContent,
-//   AccordionItem,
-//   AccordionTrigger,
-// } from '@radix-ui/react-accordion'
 import { SlashIcon } from 'lucide-react'
 import { useContext } from 'react'
 
 import AppointmentAccordion from '@/components/patient/AppointmentAccordion'
 import MedicalAccordion from '@/components/patient/MedicalAccordion'
+import { PatientContext } from '@/components/provider/patientDetails/PatientContext'
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -18,8 +13,6 @@ import {
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-
-import { PatientContext } from '../../PatientContext'
 
 export default function Page() {
   const { patient, medicalVisit, appointments } = useContext(PatientContext)

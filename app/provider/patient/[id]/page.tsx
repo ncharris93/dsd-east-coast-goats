@@ -1,3 +1,3 @@
-export default function PatientDetailsPage() {
-  return <h1>Patient Details Page</h1>
+export default function Page() {
+  return null
 }
