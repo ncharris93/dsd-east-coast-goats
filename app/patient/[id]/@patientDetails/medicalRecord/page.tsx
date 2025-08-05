@@ -45,35 +45,25 @@ export default function Page() {
             </BreadcrumbList>
           </Breadcrumb>
           <div className="flex flex-col border-3  border-black-300">
-            {/* <h3 className="font-bold text-xl sm:text-2xl md:text-3xl">
-                    Medical Record
-                  </h3> */}
             <CardHeader className="font-bold text-xl sm:text-2xl md:text-3xl">
               <CardTitle>Medical Record</CardTitle>
             </CardHeader>
             <CardContent>
-              {medicalVisit?.prescriptions && medicalVisit.allergies && (
+              {medicalVisit?.prescriptions && (
                 <MedicalAccordion
-                  prescriptions={medicalVisit.prescriptions}
-                  allergies={medicalVisit.allergies}
+                  data={medicalVisit?.prescriptions}
+                  label="prescriptions"
+                />
+              )}
+              {medicalVisit?.allergies && (
+                <MedicalAccordion
+                  data={medicalVisit?.allergies}
+                  label="allergies"
                 />
               )}
             </CardContent>
-            {/* <Accordion type="single" collapsible className='flex flex-col items-center border-4 border-lime-300'>
-              <AccordionItem value="prescriptions">
-                <AccordionTrigger>Prescriptions</AccordionTrigger>
-                <AccordionContent className="overflow-hidden data-[state=open]:animate-accordion-down data-[state=closed]:animate-accordion-up">
-                  <ul>
-                    {medicalVisit?.prescriptions?.map((prescription: string) => (
-                      <li key={prescription}>
-                        <span>{prescription}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion> */}
           </div>
+          <div className="flex flex-col border-3  border-black-300"></div>
         </div>
       </Card>
     </section>
