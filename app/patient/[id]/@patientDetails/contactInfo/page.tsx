@@ -18,12 +18,11 @@ import { PatientContext } from '../../PatientContext'
 export default function Page() {
   const { patient, appointments, person, medicalVisit, address } =
     useContext(PatientContext)
-  // console.log('contact info current patient:', patient)
-  // console.log('contact info current appointment:', appointment)
-  // console.log('contact info current person:', person)
-  // console.log('contact info current person:', medicalVisit)
-  // console.log('emergency contact in patient:', patient?.emergency_contact)
-  // console.log('emergency contact:', emergencyContact)
+  console.log('contact info current patient:', patient)
+  console.log('contact info current appointment:', appointments)
+  console.log('contact info current person:', person)
+  console.log('contact info current person:', medicalVisit)
+  console.log('emergency contact in patient:', patient?.emergencyContact)
 
   const scheduledAppointment = appointments?.find(
     (appointment) => appointment.status == 'scheduled',
