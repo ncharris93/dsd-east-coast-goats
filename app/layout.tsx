@@ -43,14 +43,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} font-sans flex flex-col`}>
+      <body
+        className={`${inter.variable} font-sans flex flex-col min-h-screen`}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <div className="flex-1">{children}</div>
           <Footer />
           <Toaster position="top-center" richColors />
         </ThemeProvider>
