@@ -9,6 +9,7 @@
 import { SlashIcon } from 'lucide-react'
 import { useContext } from 'react'
 
+import AppointmentAccordion from '@/components/patient/AppointmentAccordion'
 import MedicalAccordion from '@/components/patient/MedicalAccordion'
 import {
   Breadcrumb,
@@ -60,7 +61,18 @@ export default function Page() {
             />
           )}
         </CardContent>
-        <div className="flex flex-col border-3  border-black-300"></div>
+        <CardHeader className="font-bold text-xl sm:text-2xl md:text-3xl">
+          <CardTitle>Past Appointments</CardTitle>
+        </CardHeader>
+        <CardContent className="flex flex-col border-3  border-black-300">
+          <ul>
+            {appointments?.map((appointment) => (
+              <li key={appointment.id}>
+                <AppointmentAccordion appointment={appointment} />
+              </li>
+            ))}
+          </ul>
+        </CardContent>
       </Card>
     </section>
   )

@@ -87,7 +87,7 @@ export default function Page() {
                     </span>
                   </div>
                   <div className="border-3 border-red-300 w-full max-w-[50%] ">
-                    <h4 className="text-lg">Special Notes</h4>
+                    <h4 className="text-lg font-bold">Special Notes</h4>
                     <span className="text-sm sm:text-base md:text-lg leading-snug">
                       {medicalVisit?.summaryNotes}
                     </span>
@@ -100,7 +100,7 @@ export default function Page() {
                   </h3>
                   <div className="flex justify-between">
                     <div className="flex flex-col border-3 border-red-300 w-full">
-                      <h4>Emergency Contact</h4>
+                      <h4 className="font-bold text-lg">Emergency Contact</h4>
                       <span>
                         {patient?.emergencyContact?.firstName}{' '}
                         {patient?.emergencyContact?.lastName}
@@ -108,7 +108,7 @@ export default function Page() {
                       <span>{patient?.emergencyContact?.phone}</span>
                     </div>
                     <div className="border-3 border-red-300 w-full flex flex-col gap-1 text-sm">
-                      <h4 className="text-lg">Address</h4>
+                      <h4 className="text-lg font-bold">Address</h4>
                       <span>
                         {address?.streetA}, {address?.city} {address?.state}{' '}
                         {address?.zipCode}
