@@ -1,3 +1,9 @@
+export type EmergencyContact = {
+  firstName: string
+  lastName: string
+  phone: string
+}
+
 export type ActionResponse<T = undefined> = {
   success: boolean
   message: string
@@ -13,4 +19,14 @@ export interface Person {
   role: 'provider' | 'patient' | 'admin' | null
   createdAt: string | null
   updatedAt: string | null
+}
+
+export interface Address {
+  id: number
+  personId: number | null
+  streetA: string | null
+  streetB?: string | null
+  city: string | null
+  state: string | null
+  zipCode: string | null
 }

@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
@@ -47,8 +48,8 @@ export default function SignupForm() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 bg-background">
-      <div className="w-full max-w-md bg-card p-6 rounded-lg shadow-md border border-border">
+    <div className="min-h-screen flex items-center justify-center px-4">
+      <div className="w-full max-w-md bg-card-3 p-6 rounded-lg shadow-md border border-border ">
         <div className="flex justify-center mb-4">
           <Image
             src="/icons/logo.svg"
@@ -66,9 +67,7 @@ export default function SignupForm() {
           />
         </div>
 
-        <h1 className="text-2xl font-bold mb-6 text-center text-foreground">
-          Create Account
-        </h1>
+        <h1 className="text-2xl font-bold mb-6 text-center">Create Account</h1>
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
@@ -78,12 +77,10 @@ export default function SignupForm() {
               rules={{ required: 'First name is required' }}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-muted-foreground">
-                    First Name
-                  </FormLabel>
+                  <FormLabel className="">First Name</FormLabel>
                   <FormControl>
                     <Input
-                      className="bg-input border border-border text-foreground"
+                      className="bg-input border border-border text-foreground "
                       {...field}
                     />
                   </FormControl>
@@ -164,13 +161,19 @@ export default function SignupForm() {
 
             <Button
               type="submit"
-              className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
+              className="w-full hover:bg-primary/90 dark:bg-accent"
               disabled={form.formState.isSubmitting}
             >
               {form.formState.isSubmitting ? 'Creating account...' : 'Sign Up'}
             </Button>
           </form>
         </Form>
+        <div className="text-center mt-4">
+          <p> Already have an account?</p>
+          <Link href="/login" className="text-orange-800 hover:underline">
+            Sign In
+          </Link>
+        </div>
       </div>
     </div>
   )

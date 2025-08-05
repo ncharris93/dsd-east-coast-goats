@@ -1,48 +1,40 @@
-import 'server-only'
-
 import type { User } from '@supabase/supabase-js'
 import { cache } from 'react'
 
 import { createClient } from '@/lib/supabase/server'
-import { Tables } from '@/lib/supabase/types'
-import { ActionResponse } from '@/lib/types/auth'
-
-export async function createUser() {}
+import { ActionResponse, Address, Person } from '@/lib/types/auth'
 
 export const getCurrentUser: () => Promise<ActionResponse<User>> = cache(
   async () => {
     const supabase = await createClient()
 
-    const {
-      data: { session },
-    } = await supabase.auth.getSession()
-
     try {
-      if (session) {
-        const {
-          data: { user },
-          error,
-        } = await supabase.auth.getUser()
+      const {
+        data: { session },
+      } = await supabase.auth.getSession()
 
-        if (error) {
-          return {
-            success: false,
-            message: error?.message || 'User authentication failed',
-            error: error?.name || 'Authentication',
-          }
-        }
-
-        return {
-          success: true,
-          data: user,
-          message: 'Retrieved the current user',
-        }
-      } else {
+      if (!session) {
         return {
           success: true,
           data: null,
           message: 'No active user session found',
         }
+      }
+      const {
+        data: { user },
+        error,
+      } = await supabase.auth.getUser()
+      if (error) {
+        return {
+          success: false,
+          message: error?.message || 'User authentication failed',
+          error: error?.name || 'Authentication',
+        }
+      }
+      return {
+        success: true,
+        data: user,
+        message: 'Retrieved the current user',
       }
     } catch (err) {
       console.error('Get current user error:', err)
@@ -56,15 +48,15 @@ export const getCurrentUser: () => Promise<ActionResponse<User>> = cache(
 )
 
 export async function getCurrentPerson(
-  userId: string,
-): Promise<ActionResponse<Tables<'person'>>> {
+  authId: string,
+): Promise<ActionResponse<Person>> {
   const supabase = await createClient()
 
   try {
     const { data, error } = await supabase
       .from('person')
       .select('*')
-      .eq('person_uuid', userId)
+      .eq('person_uuid', authId)
       .single()
 
     if (error) {
@@ -75,11 +67,18 @@ export async function getCurrentPerson(
       }
     }
 
-    console.log('get current person data:', data)
+    const person = {
+      id: data.id,
+      firstName: data.first_name,
+      lastName: data.last_name,
+      role: data.role,
+      createdAt: data.created_at,
+      updatedAt: data.updated_at,
+    }
 
     return {
       success: true,
-      data: data,
+      data: person,
       message: 'Retrieved the current person',
     }
   } catch (err) {
@@ -94,7 +93,7 @@ export async function getCurrentPerson(
 
 export async function getPerson(
   personId: number | null,
-): Promise<ActionResponse<Tables<'person'>>> {
+): Promise<ActionResponse<Person>> {
   if (!personId) {
     return {
       success: false,
@@ -121,9 +120,18 @@ export async function getPerson(
 
     console.log('get person data:', data)
 
+    const person = {
+      id: data.id,
+      firstName: data.first_name,
+      lastName: data.last_name,
+      role: data.role,
+      createdAt: data.created_at,
+      updatedAt: data.updated_at,
+    }
+
     return {
       success: true,
-      data: data,
+      data: person,
       message: 'Retrieved the selected person',
     }
   } catch (err) {
@@ -138,11 +146,11 @@ export async function getPerson(
 
 export async function getAddress(
   personId: number,
-): Promise<ActionResponse<Tables<'address'>>> {
+): Promise<ActionResponse<Address>> {
   const supabase = await createClient()
 
   try {
-    const { data: address, error } = await supabase
+    const { data, error } = await supabase
       .from('address')
       .select('*')
       .eq('id', personId)
@@ -154,6 +162,16 @@ export async function getAddress(
         message: error.message,
         error: error.name,
       }
+    }
+
+    const address = {
+      id: data.id,
+      personId: data.person_id,
+      streetA: data.streeta,
+      streetB: data.streetb || '',
+      city: data.city,
+      state: data.address_state,
+      zipCode: data.zip_code,
     }
 
     return {
