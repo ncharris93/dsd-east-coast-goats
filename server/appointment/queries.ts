@@ -3,6 +3,11 @@ import 'server-only'
 import { createClient } from '@/lib/supabase/server'
 import { Tables } from '@/lib/supabase/types'
 import { ActionResponse } from '@/lib/types/auth'
+import {
+  AppointmentStatus,
+  AppointmentType,
+  PatientAppointment,
+} from '@/lib/types/patient'
 
 type AppointmentRow = { appointment_time: string | null }
 
@@ -17,6 +22,8 @@ export async function getAppointment(
       .select('*')
       .eq('patient_id', patientId)
       .single()
+
+    console.log('get appointment data:', data)
 
     if (error) {
       return {
@@ -41,7 +48,60 @@ export async function getAppointment(
   }
 }
 
-export async function getAppointments() {}
+export async function getAppointments(
+  patientId: number,
+): Promise<ActionResponse<PatientAppointment[]>> {
+  const supabase = await createClient()
+
+  try {
+    const { data, error } = await supabase
+      .from('appointment_booking')
+      .select('*')
+      .eq('patient_id', patientId)
+
+    if (error) {
+      return {
+        success: false,
+        message:
+          error.message ||
+          'Something went wrong with retrieving patient appointments',
+        error: error.name,
+      }
+    }
+
+    const appointments = data.map((appointmentResult) => {
+      const appointment = {
+        id: appointmentResult.id,
+        patientId: appointmentResult.patient_id,
+        providerId: appointmentResult.provider_id,
+        type: appointmentResult.appointment_type as AppointmentType,
+        datePaid: appointmentResult.date_paid,
+        time: appointmentResult.appointment_time,
+        status: appointmentResult.status as AppointmentStatus,
+      }
+
+      return appointment
+    })
+
+    console.log('get appointment data:', data)
+    console.log('get appointments conversion:', appointments)
+
+    return {
+      success: true,
+      message: 'Successfully retrieved patient appointments',
+      data: appointments,
+    }
+  } catch (err) {
+    console.error('Failed to get patient appointments:', err)
+    return {
+      success: false,
+      message: 'An error occurred retrieving patient appointments',
+      error: 'Failed to get patient appointments',
+    }
+  }
+}
+
+// export async function getAppointments() {}
 
 export async function getBookedAppointmentTimes(date: Date) {
   const supabase = await createClient()

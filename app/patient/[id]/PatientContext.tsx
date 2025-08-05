@@ -2,27 +2,32 @@
 
 import React, { createContext } from 'react'
 
-import { Tables } from '@/lib/supabase/types'
+import type { Address, Person } from '@/lib/types/auth'
+import type {
+  MedicalVisit,
+  Patient,
+  PatientAppointment,
+} from '@/lib/types/patient'
 
 export interface PatientContextProps {
   children: React.ReactNode
-  patient: Tables<'patient'> | null
-  appointment: Tables<'appointment_booking'> | null
-  person: Tables<'person'> | null
-  medicalVisit: Tables<'medical_visit'> | null
-  address: Tables<'address'> | null
+  patient: Patient | null
+  appointments: PatientAppointment[] | null
+  person: Person | null
+  medicalVisit: MedicalVisit | null
+  address: Address | null
 }
 
 interface PatientContextType {
-  patient: Tables<'patient'> | null
-  appointment: Tables<'appointment_booking'> | null
-  person: Tables<'person'> | null
-  medicalVisit: Tables<'medical_visit'> | null
-  address: Tables<'address'> | null
+  patient: Patient | null
+  appointments: PatientAppointment[] | null
+  person: Person | null
+  medicalVisit: MedicalVisit | null
+  address: Address | null
 }
 export const PatientContext = createContext<PatientContextType>({
   patient: null,
-  appointment: null,
+  appointments: null,
   person: null,
   medicalVisit: null,
   address: null,
@@ -31,14 +36,14 @@ export const PatientContext = createContext<PatientContextType>({
 export default function PatientContextProvider({
   children,
   patient,
-  appointment,
+  appointments,
   person,
   medicalVisit,
   address,
 }: PatientContextProps) {
   return (
     <PatientContext.Provider
-      value={{ patient, appointment, person, medicalVisit, address }}
+      value={{ patient, appointments, person, medicalVisit, address }}
     >
       {children}
     </PatientContext.Provider>

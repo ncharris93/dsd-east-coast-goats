@@ -12,13 +12,17 @@ export type ActionResponse<T = undefined> = {
   error?: string
 }
 
+export enum Role {
+  provider = 'provider',
+  patient = 'patient',
+  admin = 'admin',
+}
+
 export interface Person {
   id: number
   firstName: string | null
   lastName: string | null
-  role: 'provider' | 'patient' | 'admin' | null
-  createdAt: string | null
-  updatedAt: string | null
+  role: Role | null
 }
 
 export interface Address {

@@ -15,22 +15,19 @@ import { formatDate, getAge } from '@/utils/helpers'
 
 import { PatientContext } from '../../PatientContext'
 
-type EmergencyContact = {
-  firstName: string
-  lastName: string
-  phone: string
-}
-
 export default function Page() {
-  const { patient, appointment, person, medicalVisit, address } =
+  const { patient, appointments, person, medicalVisit, address } =
     useContext(PatientContext)
   // console.log('contact info current patient:', patient)
   // console.log('contact info current appointment:', appointment)
   // console.log('contact info current person:', person)
   // console.log('contact info current person:', medicalVisit)
   // console.log('emergency contact in patient:', patient?.emergency_contact)
-  const emergencyContact = patient?.emergency_contact as EmergencyContact | null
   // console.log('emergency contact:', emergencyContact)
+
+  const scheduledAppointment = appointments?.find(
+    (appointment) => appointment.status == 'scheduled',
+  )
 
   return (
     <section className="border-3 border-black p-2 flex flex-col items-center">
@@ -67,11 +64,11 @@ export default function Page() {
                   />
                 </div>
                 <span className="font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
-                  {person?.first_name} {person?.last_name}
+                  {person?.firstName} {person?.lastName}
                 </span>
                 <span className="text-lg sm:text-xl md:text-2xl">
-                  {patient?.date_of_birth
-                    ? getAge(patient?.date_of_birth)
+                  {patient?.dateOfBirth
+                    ? getAge(patient?.dateOfBirth)
                     : 'No age found'}
                   , {patient?.sex}
                 </span>
@@ -85,15 +82,15 @@ export default function Page() {
                       Scheduled Appointment
                     </h3>
                     <span className="text-xl">
-                      {appointment?.appointment_time
-                        ? formatDate(appointment?.appointment_time)
+                      {scheduledAppointment?.time
+                        ? formatDate(scheduledAppointment.time)
                         : 'No Appointment Scheduled'}
                     </span>
                   </div>
                   <div className="border-3 border-red-300 w-full max-w-[50%] ">
                     <h4 className="text-lg">Special Notes</h4>
                     <span className="text-sm sm:text-base md:text-lg leading-snug">
-                      {medicalVisit?.summary_notes}
+                      {medicalVisit?.summaryNotes}
                     </span>
                   </div>
                 </div>
@@ -106,16 +103,16 @@ export default function Page() {
                     <div className="flex flex-col border-3 border-red-300 w-full">
                       <h4>Emergency Contact</h4>
                       <span>
-                        {emergencyContact?.firstName}{' '}
-                        {emergencyContact?.lastName}
+                        {patient?.emergencyContact?.firstName}{' '}
+                        {patient?.emergencyContact?.lastName}
                       </span>
-                      <span>{emergencyContact?.phone}</span>
+                      <span>{patient?.emergencyContact?.phone}</span>
                     </div>
                     <div className="border-3 border-red-300 w-full flex flex-col gap-1 text-sm">
                       <h4 className="text-lg">Address</h4>
                       <span>
-                        {address?.streeta}, {address?.city}{' '}
-                        {address?.address_state} {address?.zip_code}
+                        {address?.streetA}, {address?.city} {address?.state}{' '}
+                        {address?.zipCode}
                       </span>
                       <span></span>
                     </div>

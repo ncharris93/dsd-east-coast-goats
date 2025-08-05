@@ -2,7 +2,7 @@ import React from 'react'
 
 import PatientDetailsSidebar from '@/app/patient/[id]/PatientDetailsSidebar'
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
-import { getAppointment } from '@/server/appointment/queries'
+import { getAppointments } from '@/server/appointment/queries'
 import { getAddress, getPerson } from '@/server/auth/queries'
 import { getPatient } from '@/server/patient/queries'
 import { getMedicalVisit } from '@/server/patient/queries'
@@ -38,7 +38,7 @@ export default async function Layout({
     )
   }
 
-  const personData = await getPerson(patientData.data.person_id)
+  const personData = await getPerson(patientData.data.personId)
 
   console.log('patient layout personData:', personData.data)
 
@@ -47,7 +47,7 @@ export default async function Layout({
     return null
   }
 
-  if (!patientData.data.person_id) {
+  if (!patientData.data.personId) {
     console.log('patient data person id check failed')
     return null
   }
@@ -59,16 +59,20 @@ export default async function Layout({
     return null
   }
 
-  const appointmentData = await getAppointment(patientData.data.person_id)
+  const appointmentsData = await getAppointments(patientData.data?.id)
 
-  console.log('current appointment:', appointmentData)
+  console.log('patient details appointments data:', appointmentsData)
 
-  if (!appointmentData.data) {
+  // const appointmentData = await getAppointment(patientData.data.person_id)
+
+  // console.log('current appointment:', appointmentData)
+
+  if (!appointmentsData.data) {
     console.log('appointment data check failed')
     return null
   }
 
-  console.log('patient layout appointment data:', appointmentData.data)
+  console.log('patient layout appointment data:', appointmentsData.data)
 
   const addressData = await getAddress(personData.data.id)
 
@@ -82,7 +86,7 @@ export default async function Layout({
   return (
     <PatientContextProvider
       patient={patientData.data}
-      appointment={appointmentData.data}
+      appointments={appointmentsData.data}
       person={personData.data}
       medicalVisit={medicalVisitData.data}
       address={addressData.data}

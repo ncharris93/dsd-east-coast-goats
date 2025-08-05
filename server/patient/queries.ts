@@ -1,12 +1,12 @@
 import 'server-only'
 
 import { createClient } from '@/lib/supabase/server'
-import { Tables } from '@/lib/supabase/types'
-import { ActionResponse } from '@/lib/types/auth'
+import { ActionResponse, EmergencyContact } from '@/lib/types/auth'
+import type { MedicalVisit, Patient } from '@/lib/types/patient'
 
 export async function getPatient(
   patientId: number,
-): Promise<ActionResponse<Tables<'patient'>>> {
+): Promise<ActionResponse<Patient>> {
   const supabase = await createClient()
 
   try {
@@ -26,9 +26,18 @@ export async function getPatient(
       }
     }
 
+    const patient = {
+      id: data.id,
+      personId: data.person_id,
+      dateOfBirth: data.date_of_birth,
+      sex: data.sex,
+      insuranceFlag: data.insurance_flag,
+      emergencyContact: data.emergency_contact as EmergencyContact,
+    }
+
     return {
       success: true,
-      data: data,
+      data: patient,
       message: 'Retrieved current patient',
     }
   } catch (err) {
@@ -43,11 +52,11 @@ export async function getPatient(
 
 export async function getMedicalVisit(
   patientId: number,
-): Promise<ActionResponse<Tables<'medical_visit'>>> {
+): Promise<ActionResponse<MedicalVisit>> {
   const supabase = await createClient()
 
   try {
-    const { data: medicalVisit, error } = await supabase
+    const { data, error } = await supabase
       .from('medical_visit')
       .select('*')
       .eq('id', patientId)
@@ -59,6 +68,16 @@ export async function getMedicalVisit(
         message: error.message,
         error: error.name,
       }
+    }
+
+    const medicalVisit = {
+      id: data.id,
+      patientId: data.patient_id,
+      doctorId: data.doctor_id,
+      allergies: data.allergies,
+      prescriptions: data.prescriptions,
+      summaryNotes: data.summary_notes,
+      followUpNeeded: data.followup_needed,
     }
 
     return {
