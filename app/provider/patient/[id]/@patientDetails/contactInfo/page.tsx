@@ -17,11 +17,6 @@ import { formatDate, getAge } from '@/utils/helpers'
 export default function Page() {
   const { patient, appointments, person, medicalVisit, address } =
     useContext(PatientContext)
-  console.log('contact info current patient:', patient)
-  console.log('contact info current appointment:', appointments)
-  console.log('contact info current person:', person)
-  console.log('contact info current person:', medicalVisit)
-  console.log('emergency contact in patient:', patient?.emergencyContact)
 
   const scheduledAppointment = appointments?.find(
     (appointment) => appointment.status == 'scheduled',
@@ -31,7 +26,6 @@ export default function Page() {
     <section className=" p-2 flex flex-col items-center">
       <Card className="w-full max-w-screen-lg mx-auto sm:p-6 md:p-8 bg-card-2 text-foreground">
         <CardContent className="p-0">
-          {/* main patient div */}
           <div className="b flex flex-col justify-center">
             <Breadcrumb>
               <BreadcrumbList>
@@ -48,7 +42,6 @@ export default function Page() {
             </Breadcrumb>
 
             <div className=" max-w-[1000px] flex flex-col lg:flex-row gap-5 grow p-2">
-              {/* patient pic and name */}
               <div className="flex flex-col gap-3">
                 <div className="relative w-32 h-32 sm:w-40 sm:h-40 md:w-52 md:h-52 lg:w-64 lg:h-64 ">
                   <Image
@@ -68,8 +61,6 @@ export default function Page() {
                   , {patient?.sex}
                 </span>
               </div>
-
-              {/* appointment and address */}
               <div className=" w-full flex flex-col justify-center gap-2 ">
                 <div className=" w-full flex justify-between gap-2 p-2">
                   <div className="flex flex-col gap-2">
@@ -89,7 +80,6 @@ export default function Page() {
                     </span>
                   </div>
                 </div>
-                {/* contact details */}
                 <div className="flex flex-col gap-1 ">
                   <h3 className="font-bold text-xl sm:text-2xl md:text-3xl">
                     Contact Details
