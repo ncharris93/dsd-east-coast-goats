@@ -19,14 +19,14 @@ export default function MedicalAccordion({
     <Accordion
       type="single"
       collapsible
-      className="flex flex-col border-4 border-blue-300 max-w-[400px] gap-5"
+      className="flex flex-col w-full max-w-[400px]  gap-5"
     >
       <AccordionItem
         value={label}
-        className="flex flex-col  border-b-1 border-destructive"
+        className="flex flex-col hover:bg-red  border-b-1 border-foreground  "
       >
-        <AccordionTrigger className="flex items-center w-full justify-between p-2 AccordionTrigger">
-          <span className="inline hover:border-b hover:border-destructive cursor-pointer">
+        <AccordionTrigger className="flex items-center w-full justify-between p-2 AccordionTrigger hover:rounded-md hover:bg-card-4 ">
+          <span className=" cursor-pointer  p-1">
             {label.charAt(0).toUpperCase() + label.slice(1)}
           </span>
           <ChevronDown size={20} className="cursor-pointer AccordionChevron" />

@@ -10,7 +10,7 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent } from '@/components/ui/card'
 import { formatDate, getAge } from '@/utils/helpers'
 
 import { PatientContext } from '../../PatientContext'
@@ -29,14 +29,11 @@ export default function Page() {
   )
 
   return (
-    <section className="border-3 border-black p-2 flex flex-col items-center">
-      <Card className="w-full max-w-screen-lg mx-auto sm:p-6 md:p-8">
-        <CardHeader>
-          <CardTitle>Patient Details</CardTitle>
-        </CardHeader>
+    <section className=" p-2 flex flex-col items-center">
+      <Card className="w-full max-w-screen-lg mx-auto sm:p-6 md:p-8 bg-card-2 text-foreground">
         <CardContent className="p-0">
           {/* main patient div */}
-          <div className="border-3 border-lime-300 flex flex-col justify-center">
+          <div className="b flex flex-col justify-center">
             <Breadcrumb>
               <BreadcrumbList>
                 <BreadcrumbItem className="text-xl">
@@ -51,21 +48,21 @@ export default function Page() {
               </BreadcrumbList>
             </Breadcrumb>
 
-            <div className="border-3 border-red-300 max-w-[1000px] flex flex-col lg:flex-row gap-4 grow">
+            <div className=" max-w-[1000px] flex flex-col lg:flex-row gap-5 grow p-2">
               {/* patient pic and name */}
-              <div className="flex flex-col border-8 border-yellow-500">
-                <div className="relative w-32 h-32 sm:w-40 sm:h-40 md:w-52 md:h-52 lg:w-64 lg:h-64 border-3 border-purple-300">
+              <div className="flex flex-col gap-3">
+                <div className="relative w-32 h-32 sm:w-40 sm:h-40 md:w-52 md:h-52 lg:w-64 lg:h-64 ">
                   <Image
-                    src="/images/default-user-image.jpg"
+                    src="/images/patient-profile.jpeg"
                     alt="patient-image"
                     fill
-                    className="object-cover"
+                    className="object-cover rounded-lg"
                   />
                 </div>
                 <span className="font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
                   {person?.firstName} {person?.lastName}
                 </span>
-                <span className="text-lg sm:text-xl md:text-2xl">
+                <span className="text-lg sm:text-xl md:text-2xl text-">
                   {patient?.dateOfBirth
                     ? getAge(patient?.dateOfBirth)
                     : 'No age found'}
@@ -74,9 +71,9 @@ export default function Page() {
               </div>
 
               {/* appointment and address */}
-              <div className="border-8 border-blue-700 w-full flex flex-col justify-center gap-2">
-                <div className="border-3 border-blue-300 w-full flex justify-between">
-                  <div className="flex flex-col border-3 border-red-300 gap-2">
+              <div className=" w-full flex flex-col justify-center gap-2 ">
+                <div className=" w-full flex justify-between gap-2 p-2">
+                  <div className="flex flex-col gap-2">
                     <h3 className="font-bold text-xl sm:text-2xl md:text-3xl">
                       Scheduled Appointment
                     </h3>
@@ -86,20 +83,20 @@ export default function Page() {
                         : 'No Appointment Scheduled'}
                     </span>
                   </div>
-                  <div className="border-3 border-red-300 w-full max-w-[50%] ">
+                  <div className=" w-full max-w-[50%] ">
                     <h4 className="text-lg font-bold">Special Notes</h4>
-                    <span className="text-sm sm:text-base md:text-lg leading-snug">
+                    <span className="text-sm sm:text-base md:text-lg leading-snug text-secondary">
                       {medicalVisit?.summaryNotes}
                     </span>
                   </div>
                 </div>
                 {/* contact details */}
-                <div className="flex flex-col border-3 gap-1 border-black-300">
+                <div className="flex flex-col gap-1 ">
                   <h3 className="font-bold text-xl sm:text-2xl md:text-3xl">
                     Contact Details
                   </h3>
                   <div className="flex justify-between">
-                    <div className="flex flex-col border-3 border-red-300 w-full">
+                    <div className="flex flex-col w-full">
                       <h4 className="font-bold text-lg">Emergency Contact</h4>
                       <span>
                         {patient?.emergencyContact?.firstName}{' '}
@@ -107,7 +104,7 @@ export default function Page() {
                       </span>
                       <span>{patient?.emergencyContact?.phone}</span>
                     </div>
-                    <div className="border-3 border-red-300 w-full flex flex-col gap-1 text-sm">
+                    <div className=" w-full flex flex-col gap-1 text-sm">
                       <h4 className="text-lg font-bold">Address</h4>
                       <span>
                         {address?.streetA}, {address?.city} {address?.state}{' '}

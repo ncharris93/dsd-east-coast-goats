@@ -1,6 +1,6 @@
 import React from 'react'
 
-import PatientDetailsSidebar from '@/app/patient/[id]/PatientDetailsSidebar'
+import PatientDetailsSidebar from '@/app/provider/patient/[id]/PatientDetailsSidebar'
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
 import { getAppointments } from '@/server/appointment/queries'
 import { getAddress, getPerson } from '@/server/auth/queries'
@@ -20,11 +20,7 @@ export default async function Layout({
 }) {
   const { id } = await params
 
-  console.log('current patient id:', id)
-
   const patientData = await getPatient(id)
-
-  console.log('current patient:', patientData)
 
   if (!patientData.data) {
     return (
@@ -39,8 +35,6 @@ export default async function Layout({
   }
 
   const personData = await getPerson(patientData.data.personId)
-
-  console.log('patient layout personData:', personData.data)
 
   if (!personData.data) {
     console.log('person data check failed')
@@ -93,7 +87,7 @@ export default async function Layout({
     >
       <SidebarProvider>
         <PatientDetailsSidebar patientId={id} />
-        <main className="border-3 border-yellow w-full bg-background">
+        <main className=" w-full bg-background">
           <SidebarTrigger className="hover:bg-foreground cursor-pointer" />
           {children}
           {patientDetails}

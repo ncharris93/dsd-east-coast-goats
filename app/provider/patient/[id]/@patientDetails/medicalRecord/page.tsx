@@ -29,8 +29,8 @@ export default function Page() {
   console.log('appointments in medical record page:', appointments)
 
   return (
-    <section className="border-3 border-black p-2 flex flex-col items-center">
-      <Card className="w-full max-w-screen-lg mx-auto sm:p-6 md:p-8 border-3 border-lime-300 flex flex-col justify-center">
+    <section className=" p-2 flex flex-col items-center">
+      <Card className=" bg-card-2 w-full max-w-[500px] mx-auto sm:p-6 md:p-8  flex flex-col justify-center ">
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem className="text-xl">
@@ -44,10 +44,10 @@ export default function Page() {
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
-        <CardHeader className="font-bold text-xl sm:text-2xl md:text-3xl">
+        <CardHeader className="font-bold text-xl sm:text-2xl md:text-3xl ">
           <CardTitle>Medical Record</CardTitle>
         </CardHeader>
-        <CardContent className="flex flex-col border-3  border-black-300">
+        <CardContent className="flex flex-col text-foreground ">
           {medicalVisit?.prescriptions && (
             <MedicalAccordion
               data={medicalVisit?.prescriptions}
@@ -64,7 +64,7 @@ export default function Page() {
         <CardHeader className="font-bold text-xl sm:text-2xl md:text-3xl">
           <CardTitle>Past Appointments</CardTitle>
         </CardHeader>
-        <CardContent className="flex flex-col border-3  border-black-300">
+        <CardContent className="flex flex-col ">
           <ul>
             {appointments?.map((appointment) => (
               <li key={appointment.id}>
