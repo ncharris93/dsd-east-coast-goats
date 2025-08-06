@@ -6,7 +6,41 @@ type AppointmentRow = { appointment_time: string | null }
 
 export async function getAppointment() {}
 
-export async function getAppointments() {}
+export async function getAppointmentsByDateRange(
+  startDate: Date,
+  endDate: Date,
+) {
+  const supabase = await createClient()
+
+  const { data, error } = await supabase
+    .from('appointment_booking')
+    .select(
+      `
+      id,
+      appointment_time,
+      appointment_type,
+      patient:patient_id (
+        person:person_id (
+          first_name,
+          last_name
+        )
+      ),
+      provider:provider_id (
+        first_name,
+        last_name
+      )
+    `,
+    )
+    .gte('appointment_time', startDate.toISOString())
+    .lt('appointment_time', endDate.toISOString())
+    .order('appointment_time', { ascending: true })
+
+  if (error) {
+    throw new Error(`Failed to fetch appointments: ${error.message}`)
+  }
+
+  return data
+}
 
 export async function getBookedAppointmentTimes(date: Date) {
   const supabase = await createClient()
