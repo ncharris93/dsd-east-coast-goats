@@ -24,7 +24,7 @@ export default async function SchedulePage() {
 
   return (
     <main className="my-32">
-      <Tabs defaultValue="daily" className="place-self-center">
+      <Tabs defaultValue="daily" className="place-self-center min-w-3xl">
         <TabsList>
           <TabsTrigger value="daily">Daily</TabsTrigger>
           <TabsTrigger value="weekly">Weekly</TabsTrigger>
