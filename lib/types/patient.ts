@@ -8,9 +8,3 @@ export type Message = {
 
 export type PatientName = string
 export type Provider = string
-
-export type EmergencyContact = {
-  firstName: string
-  lastName: string
-  phone: string
-}
