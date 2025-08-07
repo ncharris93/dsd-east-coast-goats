@@ -155,16 +155,15 @@ export default function ProviderProfile({
                     }
                   />
                 )}
-                {key === 'phone' ||
-                  (key === 'email' && (
-                    <StringField
-                      value={getFieldValue(key, editState, value)}
-                      editing={editState.editingKey === key}
-                      onUpdate={(val) =>
-                        editDispatch({ type: 'UPDATE', value: val })
-                      }
-                    />
-                  ))}
+                {(key === 'phone' || key === 'email') && (
+                  <StringField
+                    value={getFieldValue(key, editState, value)}
+                    editing={editState.editingKey === key}
+                    onUpdate={(val) =>
+                      editDispatch({ type: 'UPDATE', value: val })
+                    }
+                  />
+                )}
               </div>
             </div>
             <CardAction>
