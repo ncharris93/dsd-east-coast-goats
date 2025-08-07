@@ -26,3 +26,5 @@ export async function getProvider(): Promise<ProviderInfo> {
 
   return data
 }
+
+export async function getProviderProfile() {}

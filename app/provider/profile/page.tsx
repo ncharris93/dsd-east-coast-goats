@@ -11,20 +11,16 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { getCurrentUser } from '@/server/auth/queries'
-import { getProviderAccountSettings } from '@/server/provider/queries'
+import { getProviderProfile } from '@/server/provider/queries'
 
 export default async function ProfilePage() {
   const userData = await getCurrentUser()
-
-  console.log('current user profile page:', userData.data)
 
   if (!userData.data?.id || !userData.data?.email) {
     throw new Error('User data is incomplete')
   }
 
-  console.log('user:', userData.data)
-
-  const providerData = await getProviderAccountSettings(userData)
+  const providerData = await getProviderProfile(userData)
 
   if (!providerData?.data) {
     throw new Error('User data is incomplete')
