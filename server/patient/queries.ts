@@ -16,8 +16,6 @@ export async function getPatientWithPersonId(
       .eq('person_id', personId)
       .single()
 
-    console.log('get patient data:', data)
-
     if (error) {
       return {
         success: false,
@@ -52,8 +50,6 @@ export async function getPatient(
       .select('*, medical_visit(*)')
       .eq('id', patientId)
       .single()
-
-    console.log('get patient data:', data)
 
     if (error) {
       return {

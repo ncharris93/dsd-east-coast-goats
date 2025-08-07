@@ -36,7 +36,7 @@ export async function getAppointmentsByDateRange(
     `,
     )
     .gte('appointment_time', startDate.toISOString())
-    .lt('appointment_time', endDate.toISOString())
+    .lte('appointment_time', endDate.toISOString())
     .order('appointment_time', { ascending: true })
 
   if (error) {

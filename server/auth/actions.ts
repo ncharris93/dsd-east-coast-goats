@@ -58,7 +58,6 @@ export async function signUp({
       password,
       options: { data: { first_name: firstName, last_name: lastName } },
     })
-    console.log('signupdata:', data)
 
     if (error || !data?.user) {
       console.error('Signup auth error:', error?.message)

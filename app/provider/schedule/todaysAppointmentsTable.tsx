@@ -10,6 +10,8 @@ import {
 } from '@/components/ui/table'
 import { getAppointmentsByDateRange } from '@/server/appointment/queries'
 
+import { formatTime } from '../../../utils/helper'
+
 export default async function TodaysAppointmentsTable() {
   const today = new Date()
 
@@ -23,7 +25,6 @@ export default async function TodaysAppointmentsTable() {
   endOfDay.setDate(startOfDay.getDate() + 1)
 
   const appointmentData = await getAppointmentsByDateRange(startOfDay, endOfDay)
-  console.log(appointmentData)
 
   if (!appointmentData || appointmentData.length === 0) {
     return <p className="p-4">No appointments found for today.</p>
@@ -41,9 +42,10 @@ export default async function TodaysAppointmentsTable() {
       </TableHeader>
       <TableBody>
         {appointmentData.map((appointment) => {
-          const hasPassed =
-            appointment.appointment_time &&
-            new Date(appointment.appointment_time) < new Date()
+          const apptDate = appointment.appointment_time
+            ? new Date(appointment.appointment_time)
+            : undefined
+          const hasPassed = apptDate ? apptDate < new Date() : false
 
           return (
             <TableRow
@@ -54,14 +56,7 @@ export default async function TodaysAppointmentsTable() {
             >
               <TableCell className="font-medium text-primary">
                 {appointment.appointment_time
-                  ? new Date(appointment.appointment_time).toLocaleTimeString(
-                      'en-US',
-                      {
-                        hour: 'numeric',
-                        minute: '2-digit',
-                        timeZone: 'America/New_York',
-                      },
-                    )
+                  ? formatTime(appointment.appointment_time)
                   : 'N/A'}
               </TableCell>
               <TableCell>
