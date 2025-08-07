@@ -40,32 +40,46 @@ export default async function TodaysAppointmentsTable() {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {appointmentData.map((appointment) => (
-          <TableRow key={appointment.id} className="hover:bg-current/10">
-            <TableCell className="font-medium">
-              {appointment.appointment_time
-                ? new Date(appointment.appointment_time).toLocaleTimeString(
-                    'en-US',
-                    {
-                      hour: 'numeric',
-                      minute: '2-digit',
-                      timeZone: 'America/New_York',
-                    },
-                  )
-                : 'N/A'}
-            </TableCell>
-            <TableCell>
-              <Link href="#" className="hover:underline">
-                {appointment.patient?.person?.first_name}{' '}
-                {appointment.patient?.person?.last_name}
-              </Link>
-            </TableCell>
-            <TableCell>{appointment.appointment_type}</TableCell>
-            <TableCell>
-              {'Dr.'} {appointment.provider?.last_name}
-            </TableCell>
-          </TableRow>
-        ))}
+        {appointmentData.map((appointment) => {
+          const hasPassed =
+            appointment.appointment_time &&
+            new Date(appointment.appointment_time) < new Date()
+
+          return (
+            <TableRow
+              key={appointment.id}
+              className={`bg-card-1 hover:bg-black/5 ${
+                hasPassed ? 'opacity-50 line-through' : ''
+              }`}
+            >
+              <TableCell className="font-medium text-primary">
+                {appointment.appointment_time
+                  ? new Date(appointment.appointment_time).toLocaleTimeString(
+                      'en-US',
+                      {
+                        hour: 'numeric',
+                        minute: '2-digit',
+                        timeZone: 'America/New_York',
+                      },
+                    )
+                  : 'N/A'}
+              </TableCell>
+              <TableCell>
+                <Link
+                  href="#"
+                  className="font-medium underline underline-offset-2"
+                >
+                  {appointment.patient?.person?.first_name}{' '}
+                  {appointment.patient?.person?.last_name}
+                </Link>
+              </TableCell>
+              <TableCell>{appointment.appointment_type}</TableCell>
+              <TableCell>
+                {'Dr.'} {appointment.provider?.last_name}
+              </TableCell>
+            </TableRow>
+          )
+        })}
       </TableBody>
     </Table>
   )

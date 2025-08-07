@@ -6,6 +6,10 @@ type AppointmentRow = { appointment_time: string | null }
 
 export async function getAppointment() {}
 
+export type AppointmentsByDateRange = Awaited<
+  ReturnType<typeof getAppointmentsByDateRange>
+>
+
 export async function getAppointmentsByDateRange(
   startDate: Date,
   endDate: Date,
