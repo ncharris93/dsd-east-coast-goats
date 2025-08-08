@@ -203,30 +203,46 @@ export type Database = {
       }
       messages: {
         Row: {
+          appointment_id: number | null
           content: string
+          context: Database["public"]["Enums"]["message_context"]
           created_at: string | null
           id: number
+          message_type: Database["public"]["Enums"]["message_type"]
           recipient_id: number
           sender_id: number
           updated_at: string | null
         }
         Insert: {
+          appointment_id?: number | null
           content: string
+          context?: Database["public"]["Enums"]["message_context"]
           created_at?: string | null
           id?: number
+          message_type?: Database["public"]["Enums"]["message_type"]
           recipient_id: number
           sender_id: number
           updated_at?: string | null
         }
         Update: {
+          appointment_id?: number | null
           content?: string
+          context?: Database["public"]["Enums"]["message_context"]
           created_at?: string | null
           id?: number
+          message_type?: Database["public"]["Enums"]["message_type"]
           recipient_id?: number
           sender_id?: number
           updated_at?: string | null
         }
         Relationships: [
+          {
+            foreignKeyName: "messages_appointment_id_fkey"
+            columns: ["appointment_id"]
+            isOneToOne: false
+            referencedRelation: "appointment_booking"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "messages_recipient_id_fkey"
             columns: ["recipient_id"]
@@ -278,7 +294,7 @@ export type Database = {
           {
             foreignKeyName: "fk_patient_person"
             columns: ["person_id"]
-            isOneToOne: false
+            isOneToOne: true
             referencedRelation: "person"
             referencedColumns: ["id"]
           },
@@ -333,6 +349,15 @@ export type Database = {
         | "Vaccination & Immunization"
         | "Mental Health Consultation"
       contact_type: "phone" | "email"
+      message_context: "general" | "support" | "appointment"
+      message_type:
+        | "general"
+        | "support"
+        | "billing"
+        | "General Checkup"
+        | "Chronic Condition Follow-Up"
+        | "Vaccination & Immunization"
+        | "Mental Health Consultation"
       user_role: "patient" | "admin" | "provider"
     }
     CompositeTypes: {
@@ -474,6 +499,16 @@ export const Constants = {
         "Mental Health Consultation",
       ],
       contact_type: ["phone", "email"],
+      message_context: ["general", "support", "appointment"],
+      message_type: [
+        "general",
+        "support",
+        "billing",
+        "General Checkup",
+        "Chronic Condition Follow-Up",
+        "Vaccination & Immunization",
+        "Mental Health Consultation",
+      ],
       user_role: ["patient", "admin", "provider"],
     },
   },
