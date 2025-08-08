@@ -1,11 +1,10 @@
 import Link from 'next/link'
 
+import { TIMEZONE } from '@/lib/utils'
 import {
   type AppointmentsByDateRange,
   getAppointmentsByDateRange,
 } from '@/server/appointment/queries'
-
-const TIMEZONE = 'America/New_York'
 
 function getWeekBounds() {
   const today = new Date()

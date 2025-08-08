@@ -11,7 +11,7 @@ import TodaysAppointmentsTable from './todaysAppointmentsTable'
 import WeeklyAppointmentsTable from './weeklyAppointmentsTable'
 import { getWeekRange } from './weeklyAppointmentsTable'
 
-export default async function SchedulePage() {
+export default function SchedulePage() {
   const today = new Date()
   const todaysDate = today.toLocaleDateString('en-US', {
     weekday: 'long',
