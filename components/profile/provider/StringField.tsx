@@ -1,4 +1,4 @@
-import { Input } from '../../ui/input'
+import { Input } from '@/components/ui/input'
 
 export interface StringFieldProps {
   value: string
@@ -6,11 +6,7 @@ export interface StringFieldProps {
   onUpdate: (val: string) => void
 }
 
-export default function StringField({
-  value,
-  editing,
-  onUpdate,
-}: StringFieldProps) {
+export const StringField = ({ value, editing, onUpdate }: StringFieldProps) => {
   if (!editing) {
     return <p>{value}</p>
   }

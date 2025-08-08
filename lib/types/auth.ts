@@ -1,3 +1,9 @@
+export type EmergencyContact = {
+  firstName: string
+  lastName: string
+  phone: string
+}
+
 export type ActionResponse<T = undefined> = {
   success: boolean
   message: string
@@ -6,17 +12,13 @@ export type ActionResponse<T = undefined> = {
   error?: string
 }
 
-export enum Role {
-  provider = 'provider',
-  patient = 'patient',
-  admin = 'admin',
-}
-
 export interface Person {
   id: number
   firstName: string | null
   lastName: string | null
-  role: Role | null
+  role: 'provider' | 'patient' | 'admin' | null
+  createdAt: string | null
+  updatedAt: string | null
 }
 
 export interface Address {

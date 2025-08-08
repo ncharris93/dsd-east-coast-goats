@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { FaHandHoldingMedical } from 'react-icons/fa'
 
-import ProviderProfile from '@/components/profile/provider/ProviderProfile'
+import { EditProviderProfile } from '@/components/profile/provider/editProviderProfile'
 import { Avatar } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import {
@@ -10,22 +10,8 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { getCurrentUser } from '@/server/auth/queries'
-import { getProviderProfile } from '@/server/provider/queries'
 
-export default async function ProfilePage() {
-  const userData = await getCurrentUser()
-
-  if (!userData.data?.id || !userData.data?.email) {
-    throw new Error('User data is incomplete')
-  }
-
-  const providerData = await getProviderProfile(userData)
-
-  if (!providerData?.data) {
-    throw new Error('Provider data is incomplete')
-  }
-
+export default function ProfilePage() {
   return (
     <main className="flex-grow p-5">
       <div className="w-full max-w-[110px]">
@@ -49,10 +35,7 @@ export default async function ProfilePage() {
               Where Provider Profile Details Live
             </CardDescription>
           </CardHeader>
-          <ProviderProfile
-            providerDetails={providerData.data}
-            userId={userData.data?.id}
-          />
+          <EditProviderProfile />
         </Card>
       </div>
     </main>
