@@ -51,7 +51,7 @@ export default function MessageSend({
         value={content}
         onChange={(e) => setContent(e.target.value)}
         rows={2}
-        className="w-full border border-border rounded-md p-2 text-sm text-foreground placeholder:text-muted-foreground bg-background"
+        className="w-full border border-border rounded-md p-2 text-sm text-foreground placeholder:text-muted-foreground bg-muted"
         placeholder="Type your message..."
       />
       <div className="mt-2 flex justify-end">

@@ -3,38 +3,32 @@ import { redirect } from 'next/navigation'
 
 import MessageList from '@/components/messages/MessageList'
 import MessageSend from '@/components/messages/MessageSend'
-import { createClient } from '@/lib/supabase/server'
 import { MessageSender } from '@/lib/types/messages'
+import { getCurrentPerson, getCurrentUser } from '@/server/auth/queries'
 import { getConversation } from '@/server/messages/queries'
 
-type Props = {
-  params: {
-    thread_key: string
-  }
-}
+export default async function ConversationPage({
+  params,
+}: {
+  params: Promise<{ thread_key: string }>
+}) {
+  const { thread_key } = await params
+  const threadKey = thread_key
 
-export default async function ConversationPage({ params }: Props) {
-  const supabase = await createClient()
-  const { data: auth } = await supabase.auth.getUser()
-
-  if (!auth?.user) {
+  const user = await getCurrentUser()
+  if (!user.success || !user.data) {
     redirect('/login')
   }
 
-  const { data: user, error } = await supabase
-    .from('person')
-    .select('id')
-    .eq('person_uuid', auth.user.id)
-    .single()
-
-  if (error || !user) {
+  const personResponse = await getCurrentPerson(user.data.id)
+  if (!personResponse.success || !personResponse.data) {
     redirect('/login')
   }
 
-  const threadKey = decodeURIComponent(params.thread_key)
+  const person = personResponse.data
 
   const messages: MessageSender[] = await getConversation({
-    userId: user.id,
+    userId: person.id,
     thread_key: threadKey,
   })
 
@@ -47,11 +41,11 @@ export default async function ConversationPage({ params }: Props) {
     )
   }
 
-  const firstMessage = messages[0]
+  const [firstMessage] = messages
 
   // participants
   const recipientId =
-    firstMessage.sender_id === user.id
+    firstMessage.sender_id === person.id
       ? firstMessage.recipient_id
       : firstMessage.sender_id
 
@@ -68,10 +62,10 @@ export default async function ConversationPage({ params }: Props) {
           </Link>
         </div>
 
-        <MessageList messages={messages} currentUserId={user.id} />
+        <MessageList messages={messages} currentUserId={person.id} />
 
         <MessageSend
-          senderId={user.id}
+          senderId={person.id}
           recipientId={recipientId}
           context={firstMessage.context}
           message_type={firstMessage.message_type}

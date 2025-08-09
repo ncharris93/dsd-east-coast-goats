@@ -2,28 +2,22 @@ import Link from 'next/link'
 import { redirect } from 'next/navigation'
 
 import InboxList from '@/components/messages/InboxList'
-import { createClient } from '@/lib/supabase/server'
+import { getCurrentPerson, getCurrentUser } from '@/server/auth/queries'
 import { getInboxMessages } from '@/server/messages/queries'
 
 export default async function MessagesPage() {
-  const supabase = await createClient()
-  const { data: auth } = await supabase.auth.getUser()
-
-  if (!auth?.user) {
+  const user = await getCurrentUser()
+  if (!user.success || !user.data) {
     redirect('/login')
   }
 
-  const { data: user, error } = await supabase
-    .from('person')
-    .select('*')
-    .eq('person_uuid', auth.user.id)
-    .single()
-
-  if (error || !user) {
+  const personResponse = await getCurrentPerson(user.data.id)
+  if (!personResponse.success || !personResponse.data) {
     redirect('/login')
   }
 
-  const threads = await getInboxMessages(user.id)
+  const person = personResponse.data
+  const threads = await getInboxMessages(person.id)
 
   return (
     <div className="bg-background py-10">
@@ -38,7 +32,7 @@ export default async function MessagesPage() {
           </Link>
         </div>
 
-        <InboxList threads={threads} userId={user.id} />
+        <InboxList threads={threads} userId={person.id} />
       </div>
     </div>
   )

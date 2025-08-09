@@ -22,9 +22,7 @@ export default function MessageList({ messages, currentUserId }: Props) {
           <div
             key={message.id}
             className={`rounded-lg p-3 max-w-[75%] ${
-              isCurrentUser
-                ? 'ml-auto bg-primary text-primary-foreground'
-                : 'bg-muted text-muted-foreground'
+              isCurrentUser ? 'ml-auto bg-card-1 ' : 'bg-card-3 '
             }`}
           >
             <div className="text-xs font-semibold mb-1">{displayName}</div>
