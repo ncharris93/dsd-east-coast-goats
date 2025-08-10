@@ -38,9 +38,12 @@ export async function getInboxMessages(
     const otherId =
       message.sender_id === userId ? message.recipient_id : message.sender_id
 
+    const a = Math.min(userId, otherId)
+    const b = Math.max(userId, otherId)
+
     const key = generateThreadKey(
-      userId,
-      otherId,
+      a,
+      b,
       message.context,
       message.appointment_id ?? undefined,
       message.message_type,

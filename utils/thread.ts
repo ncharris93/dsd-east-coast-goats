@@ -7,9 +7,18 @@ export function generateThreadKey(
   appointmentId?: number,
   messageType?: string,
 ): string {
-  const base = appointmentId
-    ? `appointment-${appointmentId}-${Math.min(userId, otherId)}-${Math.max(userId, otherId)}`
-    : `context-${Math.min(userId, otherId)}-${Math.max(userId, otherId)}-${context}-${messageType ?? 'default'}`
+  const sortedIds = [userId, otherId].sort((a, b) => a - b).join('-')
+
+  let base: string
+
+  if (context === 'appointment') {
+    if (!appointmentId) {
+      throw new Error('appointmentId is required when context is "appointment"')
+    }
+    base = `appointment-${appointmentId}-${sortedIds}`
+  } else {
+    base = `context-${context}-${messageType}-${sortedIds}`
+  }
 
   return createHash('sha256').update(base).digest('hex')
 }

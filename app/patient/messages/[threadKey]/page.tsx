@@ -10,11 +10,10 @@ import { getConversation } from '@/server/messages/queries'
 export default async function ConversationPage({
   params,
 }: {
-  params: Promise<{ thread_key: string }>
+  params: Promise<{ threadKey: string }>
 }) {
-  const { thread_key } = await params
-  const threadKey = thread_key
-
+  const { threadKey } = await params
+  const thread_key = threadKey
   const user = await getCurrentUser()
   if (!user.success || !user.data) {
     redirect('/login')
@@ -29,14 +28,14 @@ export default async function ConversationPage({
 
   const messages: MessageSender[] = await getConversation({
     userId: person.id,
-    thread_key: threadKey,
+    thread_key: thread_key,
   })
 
   if (!messages.length) {
     return (
       <div className="text-center py-10">
         <p>No messages found in this conversation</p>
-        <Link href="/patient/messages">Back to inbox</Link>
+        <Link href="/patient/inbox">Back to inbox</Link>
       </div>
     )
   }
@@ -55,7 +54,7 @@ export default async function ConversationPage({
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold text-foreground">Conversation</h1>
           <Link
-            href="/patient/messages"
+            href="/patient/inbox"
             className="text-sm text-muted-foreground hover:underline"
           >
             ← Back to Inbox

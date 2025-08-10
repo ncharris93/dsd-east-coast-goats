@@ -6,7 +6,6 @@ CREATE TYPE message_context AS ENUM (
 
 CREATE TYPE message_type AS ENUM (
   'general',
-  'support',
   'billing'
 );
 
