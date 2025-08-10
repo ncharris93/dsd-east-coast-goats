@@ -350,7 +350,7 @@ export type Database = {
         | "Mental Health Consultation"
       contact_type: "phone" | "email"
       message_context: "general" | "support" | "appointment"
-      message_type: "general" | "support" | "billing"
+      message_type: "general" | "billing"
       user_role: "patient" | "admin" | "provider"
     }
     CompositeTypes: {
@@ -493,7 +493,7 @@ export const Constants = {
       ],
       contact_type: ["phone", "email"],
       message_context: ["general", "support", "appointment"],
-      message_type: ["general", "support", "billing"],
+      message_type: ["general", "billing"],
       user_role: ["patient", "admin", "provider"],
     },
   },

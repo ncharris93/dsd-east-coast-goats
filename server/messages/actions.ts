@@ -6,14 +6,12 @@ import { SendMessages } from '@/lib/types/messages'
 export async function sendMessage(message: SendMessages) {
   const supabase = await createClient()
 
-  // A) Confirm session exists (matches team policies expecting auth)
   const { data: authRes, error: authErr } = await supabase.auth.getUser()
   if (authErr || !authRes?.user) {
     console.error('sendMessage: NO AUTH USER', { authErr, authRes })
     throw new Error('Failed to send message')
   }
 
-  // B) Normalize/validate payload (avoid undefined for NOT NULL/FKs)
   const payload: SendMessages = {
     ...message,
     content: (message.content ?? '').trim(),
@@ -25,8 +23,6 @@ export async function sendMessage(message: SendMessages) {
     throw new Error('Failed to send message')
   }
 
-  // Optional: sanity check the sender mapping WITHOUT changing policies
-  // (Most teams' RLS require that sender_id belongs to the current auth user)
   const { data: senderRow, error: senderErr } = await supabase
     .from('person')
     .select('id, person_uuid')
@@ -51,10 +47,11 @@ export async function sendMessage(message: SendMessages) {
         sender_id: senderRow.id,
       },
     )
-    // Let it fail naturally at insert; this log tells you exactly why.
+    throw new Error(
+      'Sender person_uuid does not match authenticated user. Message not sent.',
+    )
   }
 
-  // C) Insert with .single() and detailed error logging
   const { data, error } = await supabase
     .from('messages')
     .insert(payload)
