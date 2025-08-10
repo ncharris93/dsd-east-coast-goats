@@ -1,4 +1,4 @@
-import { Database } from '../supabase/types'
+import { Database } from '@/lib/supabase/types'
 
 export type SendMessages = {
   sender_id: number
