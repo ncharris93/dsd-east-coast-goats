@@ -46,7 +46,7 @@ export async function getInboxMessages(
       b,
       message.context,
       message.appointment_id ?? undefined,
-      message.message_type,
+      message.message_type ?? undefined,
     )
 
     // latest message per thread
@@ -107,7 +107,7 @@ export async function getConversation({
       Math.max(userId, otherId),
       message.context,
       message.appointment_id ?? undefined,
-      message.message_type,
+      message.message_type ?? undefined,
     )
 
     return hashed === thread_key

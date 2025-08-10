@@ -67,7 +67,7 @@ export default async function ConversationPage({
           senderId={person.id}
           recipientId={recipientId}
           context={firstMessage.context}
-          message_type={firstMessage.message_type}
+          message_type={firstMessage.message_type ?? undefined}
           appointment_id={firstMessage.appointment_id}
         />
       </div>
