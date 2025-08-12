@@ -5,6 +5,7 @@ import { useState, useTransition } from 'react'
 
 import { SendMessages } from '@/lib/types/messages'
 import { sendMessage } from '@/server/messages/actions'
+import { showError } from '@/utils/toast'
 
 type Props = {
   senderId: number
@@ -31,17 +32,22 @@ export default function MessageSend({
     }
 
     startTransition(async () => {
-      await sendMessage({
-        sender_id: senderId,
-        recipient_id: recipientId,
-        content,
-        context,
-        message_type,
-        appointment_id,
-      })
+      try {
+        await sendMessage({
+          sender_id: senderId,
+          recipient_id: recipientId,
+          content,
+          context,
+          message_type,
+          appointment_id,
+        })
 
-      setContent('')
-      router.refresh()
+        setContent('')
+        router.refresh()
+      } catch (err) {
+        console.error(err)
+        showError('Failed to send a message')
+      }
     })
   }
 

@@ -13,7 +13,6 @@ export default async function ConversationPage({
   params: Promise<{ threadKey: string }>
 }) {
   const { threadKey } = await params
-  const thread_key = threadKey
   const user = await getCurrentUser()
   if (!user.success || !user.data) {
     redirect('/login')
@@ -28,7 +27,7 @@ export default async function ConversationPage({
 
   const messages: MessageSender[] = await getConversation({
     userId: person.id,
-    thread_key: thread_key,
+    thread_key: threadKey,
   })
 
   if (!messages.length) {

@@ -41,30 +41,32 @@ export async function getInboxMessages(
     const a = Math.min(userId, otherId)
     const b = Math.max(userId, otherId)
 
-    const key = generateThreadKey(
-      a,
-      b,
-      message.context,
-      message.appointment_id ?? undefined,
-      message.message_type ?? undefined,
-    )
+    const key = generateThreadKey({
+      userId: a,
+      otherId: b,
+      context: message.context,
+      appointmentId: message.appointment_id ?? undefined,
+      messageType: message.message_type ?? undefined,
+    })
+
+    if (threads.has(key)) {
+      continue
+    }
 
     // latest message per thread
-    if (!threads.has(key)) {
-      threads.set(key, {
-        thread_key: key,
-        context: message.context,
-        appointment_id: message.appointment_id ?? undefined,
-        last_message: message.content,
-        last_sent_at: message.created_at || '',
-        sender_name:
-          `${message.sender?.first_name ?? ''} ${message.sender?.last_name ?? ''}`.trim(),
-        sender_role: message.sender?.role ?? '',
-        sender_id: message.sender_id,
-        recipient_id: message.recipient_id,
-        latest: message.id,
-      })
-    }
+    threads.set(key, {
+      thread_key: key,
+      context: message.context,
+      appointment_id: message.appointment_id ?? undefined,
+      last_message: message.content,
+      last_sent_at: message.created_at || '',
+      sender_name:
+        `${message.sender?.first_name ?? ''} ${message.sender?.last_name ?? ''}`.trim(),
+      sender_role: message.sender?.role ?? '',
+      sender_id: message.sender_id,
+      recipient_id: message.recipient_id,
+      latest: message.id,
+    })
   }
 
   return Array.from(threads.values())
@@ -102,13 +104,13 @@ export async function getConversation({
     const otherId =
       message.sender_id === userId ? message.recipient_id : message.sender_id
 
-    const hashed = generateThreadKey(
-      Math.min(userId, otherId),
-      Math.max(userId, otherId),
-      message.context,
-      message.appointment_id ?? undefined,
-      message.message_type ?? undefined,
-    )
+    const hashed = generateThreadKey({
+      userId: Math.min(userId, otherId),
+      otherId: Math.max(userId, otherId),
+      context: message.context,
+      appointmentId: message.appointment_id ?? undefined,
+      messageType: message.message_type ?? undefined,
+    })
 
     return hashed === thread_key
   })

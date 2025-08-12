@@ -7,11 +7,11 @@ import { getInboxMessages } from '@/server/messages/queries'
 
 export default async function MessagesPage() {
   const user = await getCurrentUser()
-  if (!user.success || !user.data) {
+  if (!user.success) {
     redirect('/login')
   }
 
-  const personResponse = await getCurrentPerson(user.data.id)
+  const personResponse = await getCurrentPerson(user.data!.id)
   if (!personResponse.success || !personResponse.data) {
     redirect('/login')
   }
