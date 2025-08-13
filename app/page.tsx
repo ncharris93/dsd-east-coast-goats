@@ -32,7 +32,7 @@ export default function Home() {
           </div>
           <div className="flex gap-8">
             <Button asChild variant="cta" size="cta" className="text-lg">
-              <Link href="/patient/appointments">
+              <Link href="/appointment">
                 <CalendarHeart className="size-6" />
                 Schedule Appointment
               </Link>
@@ -43,7 +43,7 @@ export default function Home() {
               size="cta"
               className="text-lg bg-secondary"
             >
-              <Link href="/patient/appointments">
+              <Link href="/signup">
                 <UserRoundPlus className="size-6" />
                 Create an Account
               </Link>
@@ -136,7 +136,7 @@ export default function Home() {
           size="cta"
           className="text-lg bg-secondary"
         >
-          <Link href="/patient/appointments">
+          <Link href="/appointment">
             <CalendarHeart className="size-6" />
             Schedule Appointment
           </Link>
