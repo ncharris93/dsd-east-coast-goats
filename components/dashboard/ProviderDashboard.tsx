@@ -52,7 +52,7 @@ export default function ProviderDashboard({ messages }: ProviderDashboard) {
       }
     }
     fetchName()
-  }, [])
+  }, [supabase])
 
   const handleClick = () => router.push('/provider/schedule')
 
