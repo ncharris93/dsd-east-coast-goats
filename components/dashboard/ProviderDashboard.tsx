@@ -2,6 +2,7 @@
 
 import { CalendarDays } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import { useEffect, useMemo, useState } from 'react'
 
 import { Sidebar } from '@/components/dashboard/adminDashboard/sidebar'
 import { Button } from '@/components/ui/button'
@@ -13,6 +14,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import { createClient } from '@/lib/supabase/client'
 import { Appointment, Message } from '@/lib/types/patient'
 
 import Messages from './../patient/dashboard/Messages'
@@ -25,18 +27,43 @@ type ProviderDashboard = {
 
 export default function ProviderDashboard({ messages }: ProviderDashboard) {
   const router = useRouter()
-  const handleClick = () => {
-    router.push('/provider/schedule')
-  }
+  const supabase = useMemo(() => createClient(), [])
+  const [providerName, setProviderName] = useState('Provider')
+
+  useEffect(() => {
+    const fetchName = async () => {
+      const { data: auth } = await supabase.auth.getUser()
+      const uid = auth.user?.id
+      if (!uid) {
+        return
+      }
+
+      const { data: person } = await supabase
+        .from('person')
+        .select('first_name, last_name')
+        .eq('person_uuid', uid)
+        .single()
+
+      if (person) {
+        setProviderName(
+          `${person.first_name ?? ''} ${person.last_name ?? ''}`.trim() ||
+            'Provider',
+        )
+      }
+    }
+    fetchName()
+  }, [])
+
+  const handleClick = () => router.push('/provider/schedule')
+
   return (
     <div className="flex min-h-screen bg-background">
       <Sidebar />
       <main className="flex-1 p-6 space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            {' '}
             <h1 className="text-2xl font-semibold mb-3">
-              Welcome back, Lillian Bingus!
+              Welcome back, {providerName}!
             </h1>
             <p className="mt-1 text-2xl p-1">
               We&apos;re glad you&apos;re here. Let’s get you up to speed.
@@ -58,8 +85,8 @@ export default function ProviderDashboard({ messages }: ProviderDashboard) {
                     <span className="text-accent font-semibold">
                       General Check-Up
                     </span>{' '}
-                    with <span className="font-semibold">Lizar Campes</span> is
-                    on{' '}
+                    with
+                    <span className="font-semibold"> Lizar Campes</span> is on{' '}
                     <span className="text-primary font-bold">
                       August 17, 2025 at 9:30 AM
                     </span>
@@ -77,7 +104,7 @@ export default function ProviderDashboard({ messages }: ProviderDashboard) {
             </div>
           </div>
           <div className="sm:items-center lg:space-y-15 space-y-6  flex flex-col lg:items-start">
-            <Messages messages={messages} />
+            <Messages messages={messages} path="/provider" />
           </div>
         </div>
       </main>
